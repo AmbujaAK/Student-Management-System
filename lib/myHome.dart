@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import './tabs/home.dart';
 import './tabs/history.dart';
-import 'drawerMenu.dart';
-import 'popUpMenu.dart';
+import './menu/drawerMenu.dart';
+import './menu/popUpMenu.dart';
 
 class MyHomePage extends StatelessWidget {
   final String title;
