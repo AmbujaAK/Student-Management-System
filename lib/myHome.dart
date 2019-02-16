@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import './tabs/home.dart';
 import './tabs/history.dart';
-import 'menuList.dart';
+import 'drawerMenu.dart';
+import 'popUpMenu.dart';
 
 class MyHomePage extends StatelessWidget {
   final String title;
@@ -23,19 +24,7 @@ class MyHomePage extends StatelessWidget {
             backgroundColor: Colors.redAccent,
             title: Text("Dashboard"),
             actions: <Widget>[
-              new PopupMenuButton(
-                itemBuilder: (BuildContext context) => [
-                  PopupMenuItem(
-                    child: Text('menu 1'),
-                  ),
-                  PopupMenuItem(
-                    child: Text('menu 2'),
-                  ),
-                  PopupMenuItem(
-                    child: Text('menu 3'),
-                  ),
-                ],
-              )
+              PopUpMenu(),
             ],
             bottom: TabBar(
               tabs: <Widget>[
