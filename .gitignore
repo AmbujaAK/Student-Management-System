@@ -1,3 +1,9 @@
+# new added
+*.settings
+*.classpath
+*.project
+*.sh
+
 # Miscellaneous
 *.class
 *.lock
