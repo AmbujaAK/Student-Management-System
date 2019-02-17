@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../student/studentList.dart';
 
 class DrawerMenu extends StatelessWidget {
   @override
@@ -53,6 +54,25 @@ class DrawerMenu extends StatelessWidget {
           },
         ),
         ListTile(
+          leading: Icon(Icons.person),
+          title: Text('Students'),
+          onTap: () {
+            //Navigator.pop(context);
+            Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => StudentList(),
+              )
+            );
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.person_outline),
+          title: Text('Faculty'),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+        ListTile(
           leading: Icon(Icons.notifications),
           title: Text('Notifications'),
           onTap: () {
@@ -82,17 +102,20 @@ class DrawerMenu extends StatelessWidget {
           },
         ),
 
-        ButtonTheme(
-          minWidth: 150,
-          height: 48,
-          child: RaisedButton(
-            color: Colors.red,
-            child: Text("Log Out"),
-            onPressed: (){
-              //Navigator.of(context).push(
-              //MaterialPageRoute(builder: (context) => MyCustomForm())
-              //);
-            },
+        Padding(
+          padding: const EdgeInsets.all(14.0),
+          child: ButtonTheme(
+            minWidth: 150,
+            height: 48,
+            child: RaisedButton(
+              color: Colors.red,
+              child: Text("Log Out"),
+              onPressed: (){
+                //Navigator.of(context).push(
+                //MaterialPageRoute(builder: (context) => MyCustomForm())
+                //);
+              },
+            ),
           ),
         )
       ],
