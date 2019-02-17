@@ -13,6 +13,8 @@ environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
 
 dependencies:
+  url_launcher: "^3.0.2"
+  http: ^0.12.0
   flutter:
     sdk: flutter
 
