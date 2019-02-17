@@ -3,16 +3,11 @@ import './tabs/home.dart';
 import './tabs/history.dart';
 import './menu/drawerMenu.dart';
 import './menu/popUpMenu.dart';
+import './student/Profile.dart';
 
 class MyHomePage extends StatelessWidget {
   final String title;
-  //final assetsImage = new AssetImage('assets/profile/ambuja.jpg');
-  final image = new Image(
-    image : new AssetImage('assets/profile/ambuja.jpg'),
-    width: 100,
-    height: 100
-    );
-
+  
   MyHomePage({Key key, this.title}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -37,8 +32,7 @@ class MyHomePage extends StatelessWidget {
           body: TabBarView(
             children: <Widget>[
               Home(),
-              //Profile(),
-              Container(color: Colors.red[100],),
+              Profile(),
               Container(
                 child: Column(
                   children: <Widget>[
