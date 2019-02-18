@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
+import 'dart:convert';
 
 import '../myHome.dart';
 import 'registerApp.dart';
@@ -13,13 +16,30 @@ class _LoginAppState extends State<LoginApp> {
   TextEditingController username = new TextEditingController();
   TextEditingController password = new TextEditingController();
 
-  void login() {
-    String userId = username.text;
-    saveUserId(userId).then((bool committed) {
-      Navigator.push(context, MaterialPageRoute(
-        builder: (context) => MyHomePage(userId: userId),
-      ));
+  String message = "";
+  String status = "";
+  void login() async {
+    final response = await http.post("http://192.168.0.101/jusms/flutter/login.php", body: {
+      "username" : username.text,
+      "password" : password.text,
     });
+
+    var datauser = json.decode(response.body);
+    //print(datauser['status']);
+    if(datauser['status'] == "false"){
+      setState(() {
+       message = datauser['message']; 
+      });
+    }else{
+      status = datauser['status'];
+      message = datauser['message'];
+      String userId = username.text;
+      saveUserId(userId).then((bool committed) {
+        Navigator.push(context, MaterialPageRoute(
+          builder: (context) => MyHomePage(userId: userId),
+        ));
+      });
+    }
   }
 
   @override
@@ -50,8 +70,8 @@ class _LoginAppState extends State<LoginApp> {
     
     final passwordApp = TextFormField(
       autofocus: false,
-      initialValue: 'qwerty123',
-      //controller: password,
+      //initialValue: 'qwerty123',
+      controller: password,
       obscureText: true,
       decoration: InputDecoration(
         hintText: 'Password',
@@ -79,6 +99,8 @@ class _LoginAppState extends State<LoginApp> {
         ),
       ),
     );
+
+    final error = Text(message, style: TextStyle(color: Colors.redAccent,));
 
     final forgotLabel = FlatButton(
       child: Text('Forget Password ?', style: TextStyle(color: Colors.black54)),
@@ -125,6 +147,8 @@ class _LoginAppState extends State<LoginApp> {
                 usernameApp,
                 SizedBox(height: 8.0,),
                 passwordApp,
+                SizedBox(height: 4.0,),
+                error,
                 SizedBox(height: 24.0,),
                 loginButton,
                 forgotLabel,
