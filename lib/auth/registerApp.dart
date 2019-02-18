@@ -12,8 +12,20 @@ class RegisterApp extends StatefulWidget {
 }
 
 class _RegisterAppState extends State<RegisterApp> {
+  TextEditingController studentId = new TextEditingController();
   TextEditingController username = new TextEditingController();
+  TextEditingController firstname = new TextEditingController();
+  TextEditingController middlename = new TextEditingController();
+  TextEditingController lastname = new TextEditingController();
+  TextEditingController email = new TextEditingController();
+  TextEditingController mobile = new TextEditingController();
   TextEditingController password = new TextEditingController();
+  TextEditingController dob = new TextEditingController();
+  TextEditingController joindate = new TextEditingController();
+  TextEditingController imgUrl = new TextEditingController();
+  TextEditingController githubLink = new TextEditingController();
+  TextEditingController linkedinLink = new TextEditingController();
+  TextEditingController websiteLink = new TextEditingController();
 
   String status = "";
   String message = "";
@@ -51,6 +63,19 @@ class _RegisterAppState extends State<RegisterApp> {
       ),
     );
 
+    final studentIdApp = TextFormField(
+      autofocus: false,
+      //initialValue: '001511001074',
+      controller: studentId,
+      decoration: InputDecoration(
+        hintText: 'Student Id',
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(32.0),
+        )
+      )
+    );
+
     final usernameApp = TextFormField(
       autofocus: false,
       //initialValue: 'AmbujaAK',
@@ -63,7 +88,72 @@ class _RegisterAppState extends State<RegisterApp> {
         )
       )
     );
-    
+
+    final firstnameApp = TextFormField(
+      autofocus: false,
+      //initialValue: 'Ambuj',
+      controller: firstname,
+      decoration: InputDecoration(
+        hintText: 'First name',
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(32.0),
+        )
+      )
+    );
+
+    final middlenameApp = TextFormField(
+      autofocus: false,
+      //initialValue: '',
+      controller: middlename,
+      decoration: InputDecoration(
+        hintText: 'Middle name',
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(32.0),
+        )
+      )
+    );
+
+    final lastnameApp = TextFormField(
+      autofocus: false,
+      //initialValue: 'Kumar',
+      controller: lastname,
+      decoration: InputDecoration(
+        hintText: 'Last name',
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(32.0),
+        )
+      )
+    );
+
+    final emailApp = TextFormField(
+      autofocus: false,
+      //initialValue: 'itsambuja@gmail.com',
+      controller: email,
+      decoration: InputDecoration(
+        hintText: 'email',
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(32.0),
+        )
+      )
+    );
+
+    final mobileApp = TextFormField(
+      autofocus: false,
+      //initialValue: '8935802059',
+      controller: mobile,
+      decoration: InputDecoration(
+        hintText: 'mobile',
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(32.0),
+        )
+      )
+    );
+
     final passwordApp = TextFormField(
       autofocus: false,
       //initialValue: 'qwerty123',
@@ -77,7 +167,85 @@ class _RegisterAppState extends State<RegisterApp> {
         )
       )
     );
-    
+
+    final dobApp = TextFormField(
+      autofocus: false,
+      //initialValue: '04/01/1997',
+      controller: dob,
+      decoration: InputDecoration(
+        hintText: 'D.O.B',
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(32.0),
+        )
+      )
+    );
+
+    final joindateApp = TextFormField(
+      autofocus: false,
+      //initialValue: '17/08/2015',
+      controller: username,
+      decoration: InputDecoration(
+        hintText: 'Join Date',
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(32.0),
+        )
+      )
+    );
+
+    final imgUrlApp = TextFormField(
+      autofocus: false,
+      //initialValue: '',
+      controller: imgUrl,
+      decoration: InputDecoration(
+        hintText: 'Image',
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(32.0),
+        )
+      )
+    );
+
+    final githubLinkApp = TextFormField(
+      autofocus: false,
+      //initialValue: '',
+      controller: githubLink,
+      decoration: InputDecoration(
+        hintText: 'github link',
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(32.0),
+        )
+      )
+    );
+
+    final linkedinLinkApp = TextFormField(
+      autofocus: false,
+      //initialValue: '',
+      controller: linkedinLink,
+      decoration: InputDecoration(
+        hintText: 'linkedin link',
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(32.0),
+        )
+      )
+    );
+
+    final websiteLinkApp = TextFormField(
+      autofocus: false,
+      //initialValue: '',
+      controller: websiteLink,
+      decoration: InputDecoration(
+        hintText: 'website link',
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(32.0),
+        )
+      )
+    );
+
     final registerButton =Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: Material(
@@ -120,19 +288,52 @@ class _RegisterAppState extends State<RegisterApp> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Center(
-        child: ListView(
-          shrinkWrap: true,
-          padding: EdgeInsets.only(left: 24.0, right: 24.0),
-          children: <Widget>[
-            logo,
-            SizedBox(height: 48.0,),
-            usernameApp,
-            SizedBox(height: 8.0,),
-            passwordApp,
-            SizedBox(height: 24.0,),
-            registerButton,
-          ],
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(8.0, 48.0, 8.0, 48.0),
+        child: Material(
+          borderRadius: BorderRadius.circular(30.0),
+          elevation: 5.0,
+          child: Center(
+            child: ListView(
+              shrinkWrap: true,
+              padding: EdgeInsets.only(left: 24.0, right: 24.0),
+              children: <Widget>[
+                SizedBox(height: 24.0,),
+                logo,
+                SizedBox(height: 48.0,),
+                studentIdApp,
+                SizedBox(height: 8.0,),
+                usernameApp,
+                SizedBox(height: 8.0,),
+                firstnameApp,
+                SizedBox(height: 8.0,),
+                middlenameApp,
+                SizedBox(height: 8.0,),
+                lastnameApp,
+                SizedBox(height: 8.0,),
+                emailApp,
+                SizedBox(height: 8.0,),
+                mobileApp,
+                SizedBox(height: 8.0,),
+                passwordApp,
+                SizedBox(height: 8.0,),
+                dobApp,
+                SizedBox(height: 8.0,),
+                joindateApp,
+                SizedBox(height: 8.0,),
+                imgUrlApp,
+                SizedBox(height: 8.0,),
+                githubLinkApp,
+                SizedBox(height: 8.0,),
+                linkedinLinkApp,
+                SizedBox(height: 8.0,),
+                websiteLinkApp,
+                SizedBox(height: 24.0,),
+                registerButton,
+
+              ],
+            ),
+          ),
         ),
       ),
       bottomNavigationBar: bottomNavBar,

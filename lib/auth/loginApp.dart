@@ -126,20 +126,27 @@ class _LoginAppState extends State<LoginApp> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Center(
-        child: ListView(
-          shrinkWrap: true,
-          padding: EdgeInsets.only(left: 24.0, right: 24.0),
-          children: <Widget>[
-            logo,
-            SizedBox(height: 48.0,),
-            usernameApp,
-            SizedBox(height: 8.0,),
-            passwordApp,
-            SizedBox(height: 24.0,),
-            loginButton,
-            forgotLabel,
-          ],
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(8.0, 48.0, 8.0, 48.0),
+        child: Material(
+          borderRadius: BorderRadius.circular(30.0),
+          elevation: 5.0,
+          child: Center(
+            child: ListView(
+              shrinkWrap: true,
+              padding: EdgeInsets.only(left: 24.0, right: 24.0),
+              children: <Widget>[
+                logo,
+                SizedBox(height: 48.0,),
+                usernameApp,
+                SizedBox(height: 8.0,),
+                passwordApp,
+                SizedBox(height: 24.0,),
+                loginButton,
+                forgotLabel,
+              ],
+            ),
+          ),
         ),
       ),
       floatingActionButton: registerLink,
