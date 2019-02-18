@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../auth/loginApp.dart';
 
 class PopUpMenu extends StatelessWidget {
   @override
@@ -6,7 +7,14 @@ class PopUpMenu extends StatelessWidget {
     return new PopupMenuButton(
       itemBuilder: (BuildContext context) => [
         PopupMenuItem(
-          child: Text('menu 1'),
+          child: RaisedButton(
+            child: Text("logout"),
+            onPressed: (){
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) => LoginApp(),
+              ));
+            },
+          )
         ),
         PopupMenuItem(
           child: Text('menu 2'),

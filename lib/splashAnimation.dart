@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'myHome.dart';
+import './auth/loginApp.dart';
 
 class SplashAnimation extends StatefulWidget {
   @override
@@ -13,7 +13,7 @@ class _SplashAnimationState extends State<SplashAnimation> with SingleTickerProv
   @override
   void initState() {
     super.initState();
-    animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 5000));
+    animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 3000));
     animation = Tween(begin: 0.0, end: 1.0).animate(animationController);
 
     animation.addStatusListener((status) {
@@ -25,7 +25,7 @@ class _SplashAnimationState extends State<SplashAnimation> with SingleTickerProv
         new Future.delayed(
           const Duration(microseconds: 1),
           () => Navigator.push(context, MaterialPageRoute(
-            builder: (context) => MyHomePage()
+            builder: (context) => LoginApp()
             ),
           )
         );
