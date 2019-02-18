@@ -1,10 +1,8 @@
-import 'dart:convert';
-import 'dart:async';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 import '../myHome.dart';
 import 'registerApp.dart';
+import '../utils/sharedPref.dart';
 
 class LoginApp extends StatefulWidget {
   @override
@@ -15,26 +13,13 @@ class _LoginAppState extends State<LoginApp> {
   TextEditingController username = new TextEditingController();
   TextEditingController password = new TextEditingController();
 
-  String status = "";
-  String message = "";
-
-  Future<List> _login() async {
-    final response = await http.post("http://192.168.0.101/jusms/flutter/login.php", body: {
-      "username" : username.text,
-      "password" :password.text,
-    });
-
-    var datauser = json.decode(response.body);
-    
-    if(datauser.length == 0){
-      setState(() {
-       message = "login fail"; 
-      });
-    }else{
+  void login() {
+    String userId = username.text;
+    saveUserId(userId).then((bool committed) {
       Navigator.push(context, MaterialPageRoute(
-        builder: (context) => MyHomePage()
+        builder: (context) => MyHomePage(userId: userId),
       ));
-    }
+    });
   }
 
   @override
@@ -46,15 +31,14 @@ class _LoginAppState extends State<LoginApp> {
       child: CircleAvatar(
         backgroundColor: Colors.transparent,
         radius: 48.0,
-        //child: FlutterLogo(),
         child: logoJU
       ),
     );
 
     final usernameApp = TextFormField(
       autofocus: false,
-      initialValue: 'AmbujaAK',
-      //controller: username,
+      //initialValue: 'AmbujaAK',
+      controller: username,
       decoration: InputDecoration(
         hintText: 'Username',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -89,7 +73,7 @@ class _LoginAppState extends State<LoginApp> {
           minWidth: 200.0,
           height: 42.0,
           onPressed: (){
-            _login();
+            login();
           },
           child: Text('Log In', style: TextStyle(color: Colors.white)),
         ),
@@ -104,7 +88,7 @@ class _LoginAppState extends State<LoginApp> {
     );
 
     final registerLink = FloatingActionButton(
-      child: Text("New"),
+      child: Text('new'),
       isExtended: false,
       foregroundColor: Colors.yellow,
       backgroundColor: Colors.blueAccent,

@@ -15,7 +15,7 @@ class StudentList extends StatefulWidget {
 
 class _StudentListState extends State<StudentList> {
   Future<List> getData() async{
-    final response = await http.get("http://192.168.0.104/jusms/flutter/getStudent.php");
+    final response = await http.get("http://192.168.0.101/jusms/flutter/getStudent.php");
     
     return json.decode(response.body);
   }

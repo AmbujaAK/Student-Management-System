@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import '../student/studentList.dart';
 
 class DrawerMenu extends StatelessWidget {
+  final String userId;
+  DrawerMenu({Key key, this.userId}):super(key:key);
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -15,6 +18,9 @@ class DrawerMenu extends StatelessWidget {
                 height: 150,
                 width: 100,
                 color: Colors.green,
+                child: Center(
+                  child: Text("AmbujaAK"),
+                ),
               ),
               Container(
                 height: 150,

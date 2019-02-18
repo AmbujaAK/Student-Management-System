@@ -1,14 +1,67 @@
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import './tabs/home.dart';
 import './tabs/history.dart';
 import './menu/drawerMenu.dart';
 import './menu/popUpMenu.dart';
 import './student/Profile.dart';
+import './utils/sharedPref.dart';
 
-class MyHomePage extends StatelessWidget {
-  final String title;
-  
-  MyHomePage({Key key, this.title}) : super(key: key);
+class MyHomePage extends StatefulWidget {
+  final String userId;
+  MyHomePage({Key key,this.userId});
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+class _MyHomePageState extends State<MyHomePage> {
+  List list = List();
+  var isLoading =false;
+
+  _fetchData() async {
+    setState(() {
+     isLoading =false;
+    });
+
+    final response = await http.get("http://192.168.0.101/jusms/flutter/getStudent.php");
+
+    if(response.statusCode == 200){
+      list = json.decode(response.body) as List;
+      setState(() {
+       isLoading =true;
+      });
+    } else {
+      throw Exception('failed to load user data');
+    }
+  }
+
+  String name = "";
+  @override
+  void initState() {
+    getUserId().then(updateUserId);
+    _fetchData();
+    super.initState();
+  }
+
+  void updateUserId(String usename){
+    setState(() {
+     this.name = usename;
+    });
+  }
+
+  int _getIndex(List list){
+    int index = 0;
+    for(var i =0; i<list.length; i++){
+      if(list[i]['username'] == name){
+        index = i;
+        break;
+      }
+    }
+    return index;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +70,7 @@ class MyHomePage extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.redAccent,
-            title: Text("Dashboard"),
+            title: Text(name),
             actions: <Widget>[
               PopUpMenu(),
             ],
@@ -29,10 +82,12 @@ class MyHomePage extends StatelessWidget {
               ],
             ),
           ),
-          body: TabBarView(
+          body: !isLoading ?
+          Center(child: CircularProgressIndicator()) :
+          TabBarView(
             children: <Widget>[
               Home(),
-              Profile(),
+              Profile(list:list,index: _getIndex(list),),
               Container(
                 child: Column(
                   children: <Widget>[
@@ -46,7 +101,7 @@ class MyHomePage extends StatelessWidget {
           ),
 
           drawer: Drawer(
-            child: DrawerMenu(),
+            child: DrawerMenu(userId: name,),
           ),
         ),
       ),
