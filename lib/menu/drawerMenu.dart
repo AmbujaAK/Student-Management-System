@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../student/studentList.dart';
 import '../faculty/facultyList.dart';
+import '../utils/sharedPref.dart';
+import '../auth/loginApp.dart';
 
 class DrawerMenu extends StatelessWidget {
   final String userId;
@@ -122,9 +124,10 @@ class DrawerMenu extends StatelessWidget {
               color: Colors.red,
               child: Text("Log Out"),
               onPressed: (){
-                //Navigator.of(context).push(
-                //MaterialPageRoute(builder: (context) => MyCustomForm())
-                //);
+                clearPref();
+                Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => LoginApp()),
+                );
               },
             ),
           ),

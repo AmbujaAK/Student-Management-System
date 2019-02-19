@@ -20,3 +20,8 @@ Future<String> getUserId() async {
 
   return userId;
 }
+
+Future clearPref() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.clear();
+}
