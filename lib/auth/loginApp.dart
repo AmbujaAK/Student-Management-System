@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:async';
 import 'dart:convert';
 
 import '../myHome.dart';
 import 'registerApp.dart';
 import '../utils/sharedPref.dart';
+import '../utils/constant.dart';
 
 class LoginApp extends StatefulWidget {
   @override
@@ -19,7 +19,7 @@ class _LoginAppState extends State<LoginApp> {
   String message = "";
   String status = "";
   void login() async {
-    final response = await http.post("http://192.168.0.101/jusms/flutter/login.php", body: {
+    final response = await http.post(Constant.loginUrl, body: {
       "username" : username.text,
       "password" : password.text,
     });
@@ -31,8 +31,10 @@ class _LoginAppState extends State<LoginApp> {
        message = datauser['message']; 
       });
     }else{
+      setState(() {
       status = datauser['status'];
       message = datauser['message'];
+      });
       String userId = username.text;
       saveUserId(userId).then((bool committed) {
         Navigator.push(context, MaterialPageRoute(
