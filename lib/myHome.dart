@@ -8,6 +8,7 @@ import './menu/drawerMenu.dart';
 import './menu/popUpMenu.dart';
 import './student/Profile.dart';
 import './utils/sharedPref.dart';
+import './utils/constant.dart';
 
 class MyHomePage extends StatefulWidget {
   final String userId;
@@ -18,19 +19,19 @@ class MyHomePage extends StatefulWidget {
 }
 class _MyHomePageState extends State<MyHomePage> {
   List list = List();
-  var isLoading =false;
+  var isLoading =true;
 
   _fetchData() async {
     setState(() {
-     isLoading =false;
+     isLoading =true;
     });
 
-    final response = await http.get("http://192.168.0.101/jusms/flutter/getStudent.php");
+    final response = await http.get(Constant.studentUrl);
 
     if(response.statusCode == 200){
       list = json.decode(response.body) as List;
       setState(() {
-       isLoading =true;
+       isLoading =false;
       });
     } else {
       throw Exception('failed to load user data');
@@ -82,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           ),
-          body: !isLoading ?
+          body: isLoading ?
           Center(child: CircularProgressIndicator()) :
           TabBarView(
             children: <Widget>[
