@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../student/studentList.dart';
+import '../faculty/facultyList.dart';
 
 class DrawerMenu extends StatelessWidget {
   final String userId;
@@ -75,7 +76,11 @@ class DrawerMenu extends StatelessWidget {
           leading: Icon(Icons.person_outline),
           title: Text('Faculty'),
           onTap: () {
-            Navigator.pop(context);
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => FacultyList(),
+              )
+            );
           },
         ),
         ListTile(

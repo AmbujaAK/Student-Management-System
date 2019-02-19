@@ -4,4 +4,5 @@ class Constant {
   static String loginUrl = url + "login.php";
   static String registerUrl = url + "register.php";
   static String studentUrl =url + "getStudent.php";
+  static String facultyUrl =url + "getFaculty.php";
 }
