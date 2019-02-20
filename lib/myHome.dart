@@ -102,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
 
           drawer: Drawer(
-            child: DrawerMenu(userId: name,),
+            child: DrawerMenu(list:list,index: _getIndex(list),),
           ),
         ),
       ),
