@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'splashAnimation.dart';
+import './auth/passCode.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashAnimation(),
+      home: PassCode(),
       theme: ThemeData(
         primaryColor: Colors.redAccent,
       ),
