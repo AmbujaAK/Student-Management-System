@@ -7,6 +7,9 @@ import '../myHome.dart';
 import 'loginApp.dart';
 
 class RegisterApp extends StatefulWidget {
+  final TextEditingController user_id;
+  RegisterApp({Key key, this.user_id});
+
   @override
   _RegisterAppState createState() => _RegisterAppState();
 }
@@ -65,8 +68,10 @@ class _RegisterAppState extends State<RegisterApp> {
 
     final studentIdApp = TextFormField(
       autofocus: false,
+      enabled: false,
       //initialValue: '001511001074',
-      controller: studentId,
+      controller: widget.user_id,
+      style: TextStyle(color: Colors.grey),
       decoration: InputDecoration(
         hintText: 'Student Id',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -287,10 +292,11 @@ class _RegisterAppState extends State<RegisterApp> {
 
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
       body: Padding(
         padding: const EdgeInsets.fromLTRB(8.0, 48.0, 8.0, 48.0),
         child: Material(
+          shadowColor: Colors.yellow,
           borderRadius: BorderRadius.circular(30.0),
           elevation: 5.0,
           child: Center(

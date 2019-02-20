@@ -2,31 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import '../myHome.dart';
+import 'registerApp.dart';
 import '../utils/sharedPref.dart';
 import '../utils/constant.dart';
-import 'registerApp.dart';
-import 'verifyUser.dart';
 
-class LoginApp extends StatefulWidget {
+class VerifyUser extends StatefulWidget {
   @override
-  _LoginAppState createState() => _LoginAppState();
+  _VerifyUserState createState() => _VerifyUserState();
 }
 
-class _LoginAppState extends State<LoginApp> {
-  TextEditingController username = new TextEditingController();
-  TextEditingController password = new TextEditingController();
+class _VerifyUserState extends State<VerifyUser> {
+  TextEditingController userId = new TextEditingController();
 
   String message = "";
   String status = "";
-  void login() async {
-    final response = await http.post(Constant.loginUrl, body: {
-      "username" : username.text,
-      "password" : password.text,
+  void verify() async {
+    final response = await http.post(Constant.verifyUrl, body: {
+      "user_id" : userId.text,
     });
 
     var datauser = json.decode(response.body);
-    //print(datauser['status']);
+    
     if(datauser['status'] == "false"){
       setState(() {
        message = datauser['message']; 
@@ -36,10 +32,10 @@ class _LoginAppState extends State<LoginApp> {
       status = datauser['status'];
       message = datauser['message'];
       });
-      String userId = username.text;
-      saveUserId(userId).then((bool committed) {
+      String user = userId.text;
+      saveUserId(user).then((bool committed) {
         Navigator.push(context, MaterialPageRoute(
-          builder: (context) => MyHomePage(userId: userId),
+          builder: (context) => RegisterApp(user_id: userId,),
         ));
       });
     }
@@ -50,7 +46,7 @@ class _LoginAppState extends State<LoginApp> {
     final logoJU =Image.asset('assets/images/logo1.png');
     
     final logo = Hero(
-      tag: 'log',
+      tag: 'verify',
       child: CircleAvatar(
         backgroundColor: Colors.transparent,
         radius: 48.0,
@@ -58,12 +54,11 @@ class _LoginAppState extends State<LoginApp> {
       ),
     );
 
-    final usernameApp = TextFormField(
+    final userIdApp = TextFormField(
       autofocus: false,
-      //initialValue: 'AmbujaAK',
-      controller: username,
+      controller: userId,
       decoration: InputDecoration(
-        hintText: 'Username',
+        hintText: 'userId',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(32.0),
@@ -71,21 +66,7 @@ class _LoginAppState extends State<LoginApp> {
       )
     );
     
-    final passwordApp = TextFormField(
-      autofocus: false,
-      //initialValue: 'qwerty123',
-      controller: password,
-      obscureText: true,
-      decoration: InputDecoration(
-        hintText: 'Password',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32.0),
-        )
-      )
-    );
-    
-    final loginButton =Padding(
+    final verifyButton =Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: Material(
         borderRadius: BorderRadius.circular(30.0),
@@ -96,32 +77,25 @@ class _LoginAppState extends State<LoginApp> {
           minWidth: 200.0,
           height: 42.0,
           onPressed: (){
-            login();
+            verify();
           },
-          child: Text('Log In', style: TextStyle(color: Colors.white)),
+          child: Text('Verify User', style: TextStyle(color: Colors.white)),
         ),
       ),
     );
 
     final error = Text(message, style: TextStyle(color: Colors.redAccent,));
 
-    final forgotLabel = FlatButton(
-      child: Text('Forget Password ?', style: TextStyle(color: Colors.black54)),
-      onPressed: () {
-
-      },
-    );
-
-    final verifyLink = FloatingActionButton(
-      child: Text('new'),
+    final loginLink = FloatingActionButton(
+      child: Text('login'),
       isExtended: false,
       foregroundColor: Colors.yellow,
       backgroundColor: Colors.blueAccent,
       elevation: 5.0,
-      heroTag: "verify",
+      heroTag: "reg",
       onPressed: (){
         Navigator.push(context, MaterialPageRoute(
-          builder: (context) => VerifyUser(),
+          builder: (context) => RegisterApp(),
         ));
       },
     );
@@ -148,20 +122,17 @@ class _LoginAppState extends State<LoginApp> {
               children: <Widget>[
                 logo,
                 SizedBox(height: 48.0,),
-                usernameApp,
+                userIdApp,
                 SizedBox(height: 8.0,),
-                passwordApp,
-                SizedBox(height: 4.0,),
                 error,
                 SizedBox(height: 24.0,),
-                loginButton,
-                forgotLabel,
+                verifyButton,
               ],
             ),
           ),
         ),
       ),
-      floatingActionButton: verifyLink,
+      floatingActionButton: loginLink,
       bottomNavigationBar: bottomNavBar,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
