@@ -5,7 +5,6 @@ import 'dart:convert';
 import '../myHome.dart';
 import '../utils/sharedPref.dart';
 import '../utils/constant.dart';
-import 'registerApp.dart';
 import 'verifyUser.dart';
 
 class LoginApp extends StatefulWidget {

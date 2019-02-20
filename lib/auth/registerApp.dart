@@ -7,8 +7,8 @@ import '../myHome.dart';
 import 'loginApp.dart';
 
 class RegisterApp extends StatefulWidget {
-  final TextEditingController user_id;
-  RegisterApp({Key key, this.user_id});
+  final TextEditingController userId;
+  RegisterApp({Key key, this.userId});
 
   @override
   _RegisterAppState createState() => _RegisterAppState();
@@ -33,7 +33,7 @@ class _RegisterAppState extends State<RegisterApp> {
   String status = "";
   String message = "";
 
-  Future<List> _register() async {
+  Future _register() async {
     final response = await http.post("http://192.168.0.101/jusms/flutter/register.php", body: {
       "username" : username.text,
       "password" :password.text,
@@ -70,7 +70,7 @@ class _RegisterAppState extends State<RegisterApp> {
       autofocus: false,
       enabled: false,
       //initialValue: '001511001074',
-      controller: widget.user_id,
+      controller: widget.userId,
       style: TextStyle(color: Colors.grey),
       decoration: InputDecoration(
         hintText: 'Student Id',
