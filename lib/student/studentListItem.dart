@@ -3,8 +3,8 @@ import 'studentDetails.dart';
 
 class StudentListItem extends StatelessWidget {
   final List list;
-
-  StudentListItem({Key key, this.list}):super(key:key);
+  final int index;
+  StudentListItem({Key key, this.list, this.index}):super(key:key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,14 @@ class StudentListItem extends StatelessWidget {
               leading: Container(
                 height: 60,
                 width: 60,
-                child: Image.network(list[index]['img_url'])
+                decoration: BoxDecoration(
+                  color: Colors.redAccent,
+                  image: DecorationImage(
+                    image: NetworkImage(list[index]['img_url']),
+                    fit: BoxFit.cover
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                ),
               ),
               title: Text(list[index]['fname'] + " " +list[index]['lname']),
               subtitle: Text(list[index]['email']),
