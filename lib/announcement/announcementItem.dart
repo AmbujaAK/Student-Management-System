@@ -19,7 +19,7 @@ class _AnnouncementItemState extends State<AnnouncementItem> {
         innerTopWidget: InnerTopWidget(),
         innerBottomWidget: InnerBottomWidget(),
 
-        cellSize: Size(MediaQuery.of(context).size.width, 175),
+        cellSize: Size(MediaQuery.of(context).size.width, 120),
         padding: EdgeInsets.all(10.0),
       ),
     );
