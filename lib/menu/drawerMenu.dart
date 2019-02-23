@@ -5,6 +5,8 @@ import '../student/studentList.dart';
 import '../faculty/facultyList.dart';
 import '../utils/sharedPref.dart';
 import '../auth/loginApp.dart';
+import '../attendance/attendance.dart';
+import '../announcement/announcements.dart';
 
 class DrawerMenu extends StatelessWidget {
   final List list;
@@ -97,7 +99,11 @@ class DrawerMenu extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.pop(context);
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => Attendance(),
+          )
+        );
       },
     );
 
@@ -331,7 +337,11 @@ class DrawerMenu extends StatelessWidget {
               ),
             ),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => Announcement(),
+                )
+              );
             },
           ),
           ListTile(
