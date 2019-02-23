@@ -36,7 +36,7 @@ class _LoginAppState extends State<LoginApp> {
       message = datauser['message'];
       });
       String userId = username.text;
-      saveUserId(userId).then((bool committed) {
+      saveUserId(userId,status).then((bool committed) {
         Navigator.push(context, MaterialPageRoute(
           builder: (context) => MyHomePage(userId: userId),
         ));

@@ -33,7 +33,7 @@ class _VerifyUserState extends State<VerifyUser> {
       message = datauser['message'];
       });
       String user = userId.text;
-      saveUserId(user).then((bool committed) {
+      saveUserId(user,status).then((bool committed) {
         Navigator.push(context, MaterialPageRoute(
           builder: (context) => RegisterApp(userId: userId,),
         ));

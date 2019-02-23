@@ -7,9 +7,10 @@ class SharedPref {
   SharedPref({Key key, this.userId});
 }
 
-Future<bool> saveUserId(String userId) async {
+Future<bool> saveUserId(String userId, String status) async {
   SharedPreferences pref = await SharedPreferences.getInstance();
   pref.setString("userId", userId);
+  pref.setString("status", status);
   
   return pref.commit();
 }
@@ -19,6 +20,13 @@ Future<String> getUserId() async {
   String userId = pref.getString("userId");
 
   return userId;
+}
+
+Future<String> getLoginStatus() async {
+  SharedPreferences pref =await SharedPreferences.getInstance();
+  String status =pref.getString("status");
+
+  return status;
 }
 
 Future clearPref() async {

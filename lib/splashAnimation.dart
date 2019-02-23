@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+
 import './auth/loginApp.dart';
+import './utils/sharedPref.dart';
+import './myHome.dart';
 
 class SplashAnimation extends StatefulWidget {
   @override
@@ -13,6 +16,7 @@ class _SplashAnimationState extends State<SplashAnimation> with SingleTickerProv
   @override
   void initState() {
     super.initState();
+
     animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 3000));
     animation = Tween(begin: 0.0, end: 1.0).animate(animationController);
 
@@ -21,7 +25,8 @@ class _SplashAnimationState extends State<SplashAnimation> with SingleTickerProv
         animationController.reverse();
       }else if (status ==AnimationStatus.dismissed){
         //animationController.forward();
-        
+        getLoginStatus().then(goToHomePage);
+        /*
         new Future.delayed(
           const Duration(microseconds: 1),
           () => Navigator.push(context, MaterialPageRoute(
@@ -29,11 +34,25 @@ class _SplashAnimationState extends State<SplashAnimation> with SingleTickerProv
             ),
           )
         );
-        
+        */
       }
     });
 
     animationController.forward();
+  }
+
+  void goToHomePage(String status){
+    if(status == "true"){
+      getUserId().then((String userId) {
+        Navigator.push(context, MaterialPageRoute(
+          builder: (context) => MyHomePage(userId: userId,),
+        ));
+      });
+    }else{
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) => LoginApp(),
+      ));
+    }
   }
 
   @override
