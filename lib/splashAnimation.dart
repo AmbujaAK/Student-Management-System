@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import './animation/loginAnimation.dart';
 import './auth/loginApp.dart';
 import './utils/sharedPref.dart';
 import './myHome.dart';
@@ -50,7 +51,8 @@ class _SplashAnimationState extends State<SplashAnimation> with SingleTickerProv
       });
     }else{
       Navigator.push(context, MaterialPageRoute(
-        builder: (context) => LoginApp(),
+        //builder: (context) => LoginApp(),
+        builder: (context) => LoginAnimation(loginApp: LoginApp(),)
       ));
     }
   }
