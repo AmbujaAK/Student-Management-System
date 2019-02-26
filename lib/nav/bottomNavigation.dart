@@ -6,9 +6,10 @@ import '../menu/popUpMenu.dart';
 import '../menu/drawerMenu.dart';
 import '../utils/sharedPref.dart';
 import '../utils/constant.dart';
-import '../nav/fab_with_icons.dart';
 import '../nav/fab_bottom_app_bar.dart';
-import '../nav/layout.dart';
+import '../attendance/calendar.dart';
+import 'home1.dart';
+import '../student/Profile.dart';
 
 class BottomNavigation extends StatefulWidget {
   final String userId;
@@ -20,23 +21,10 @@ class BottomNavigation extends StatefulWidget {
 
 class _BottomNavigationState extends State<BottomNavigation> with TickerProviderStateMixin {
 
-  String _lastSelected = 'TAB: 0';
-
-  void _selectedTab(int index) {
-    setState(() {
-      _lastSelected = 'TAB: $index';
-    });
-  }
-
-  void _selectedFab(int index) {
-    setState(() {
-      _lastSelected = 'FAB: $index';
-    });
-  }
-
   List list = List();
   var isLoading =true;
-
+  int tabIndex = 0;  
+  
   _fetchData() async {
     setState(() {
      isLoading =true;
@@ -57,6 +45,7 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
   String name = "";
   @override
   void initState() {
+    tabIndex = 0;
     getUserId().then(updateUserId);
     _fetchData();
     super.initState();
@@ -64,7 +53,7 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
 
   void updateUserId(String usename){
     setState(() {
-     this.name = usename;
+     name = usename;
     });
   }
 
@@ -79,8 +68,22 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
     return index;
   }
 
+  void _selectedTab(int index) {
+    setState(() {
+      tabIndex =index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+
+  List<Widget> tabs = [
+    Calender(),
+    Home1(name: "Ambuja",),
+    Home1(name: "Aashish",),
+    Profile(list: list, index: _getIndex(list),),
+  ];
+
   return Scaffold(
       appBar: AppBar(
         title: Text("Dashboard"),
@@ -88,53 +91,37 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
           PopUpMenu(),
         ],
       ),
-      body: Center(
-        child: Text(
-          _lastSelected,
-          style: TextStyle(fontSize: 32.0),
+      body: isLoading ?
+        Center(child: CircularProgressIndicator()) :
+        Center(
+          child: tabs[tabIndex],
         ),
-      ),
       
       bottomNavigationBar: FABBottomAppBar(
-        centerItemText: 'A',
+        centerItemText: ' ',
         color: Colors.grey,
         selectedColor: Colors.red,
         notchedShape: CircularNotchedRectangle(),
         onTabSelected: _selectedTab,
         items: [
-          FABBottomAppBarItem(iconData: Icons.menu, text: 'This'),
-          FABBottomAppBarItem(iconData: Icons.layers, text: 'Is'),
-          FABBottomAppBarItem(iconData: Icons.dashboard, text: 'Bottom'),
-          FABBottomAppBarItem(iconData: Icons.info, text: 'Bar'),
+          FABBottomAppBarItem(iconData: Icons.home, text: 'Home'),
+          FABBottomAppBarItem(iconData: Icons.layers, text: 'attend'),
+          FABBottomAppBarItem(iconData: Icons.note, text: 'notes'),
+          FABBottomAppBarItem(iconData: Icons.info, text: 'Info'),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: _buildFab(
-          context), // This trailing comma makes auto-formatting nicer for build methods.
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){},
+        backgroundColor: Colors.redAccent,
+        //isExtended: true,
+        mini: false,
+        elevation: 4,
+        tooltip: list[_getIndex(list)]['fname'] + " " +list[_getIndex(list)]['lname'],
+        child: Text(list[_getIndex(list)]['fname'][0]),
+      ),
       drawer: Drawer(
         child: DrawerMenu(list:list,index: _getIndex(list),),
-      ),
-    );
-  }
-
-  Widget _buildFab(BuildContext context) {
-    final icons = [ Icons.sms, Icons.mail, Icons.phone ];
-    return AnchoredOverlay(
-      showOverlay: true,
-      overlayBuilder: (context, offset) {
-        return CenterAbout(
-          position: Offset(offset.dx, offset.dy - icons.length * 35.0),
-          child: FabWithIcons(
-            icons: icons,
-            onIconTapped: _selectedFab,
-          ),
-        );
-      },
-      child: FloatingActionButton(
-        onPressed: () { },
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-        elevation: 2.0,
       ),
     );
   }
