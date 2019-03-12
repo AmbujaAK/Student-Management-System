@@ -12,7 +12,7 @@ import '../animation/flipAnimation.dart';
 class DrawerMenu extends StatelessWidget {
   final List list;
   final int index;
-  DrawerMenu({Key key, this.list, this.index});
+  DrawerMenu({Key key, this.list, this.index =0});
 
   @override
   Widget build(BuildContext context) {

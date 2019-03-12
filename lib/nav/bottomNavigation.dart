@@ -13,7 +13,10 @@ import '../student/Profile.dart';
 
 class BottomNavigation extends StatefulWidget {
   final String userId;
-  BottomNavigation({Key key,this.userId});
+  BottomNavigation({
+    Key key,
+    this.userId,
+  });
 
   @override
   _BottomNavigationState createState() => _BottomNavigationState();
@@ -21,23 +24,25 @@ class BottomNavigation extends StatefulWidget {
 
 class _BottomNavigationState extends State<BottomNavigation> with TickerProviderStateMixin {
 
-  //List list = List();
-  List list;
+  List list = List();
   var isLoading =true;
-  int tabIndex;  
+  int tabIndex;
   
   _fetchData() async {
     setState(() {
      isLoading =true;
     });
-
-    final response = await http.get(Constant.studentUrl);
+    
+    //String _url = 'https://demoprojectjuit.000webhostapp.com/flutter/getLoggedInUser.php?username=AmbujaAK';
+    String url = Constant(widget.userId).loggedInUserUrl;
+    final response = await http.get(url);
 
     if(response.statusCode == 200){
       list = json.decode(response.body) as List;
       setState(() {
        isLoading =false;
       });
+      print(list);
     } else {
       throw Exception('failed to load user data');
     }
@@ -46,6 +51,7 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
   String name = "";
   @override
   void initState() {
+    print(list);
       tabIndex = 0;
     getUserId().then(updateUserId);
     _fetchData();
@@ -56,17 +62,6 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
     setState(() {
      name = usename;
     });
-  }
-
-  int _getIndex(List list){
-    int index = 0;
-    for(var i =0; i<list.length; i++){
-      if(list[i]['username'] == name){
-        index = i;
-        break;
-      }
-    }
-    return index;
   }
 
   void _selectedTab(int index) {
@@ -84,8 +79,22 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
     Home1(name: "Ambuj",),
     Home1(name: "Kumar",),
     Calender(),
-    Profile(list: list, index: _getIndex(list),),
+    Profile(list: list),
   ];
+  var centerItemText;
+  var toolTip;
+
+  if( list.length == 1){
+    centerItemText = list[0]['fname'][0] + ' ' +list[0]['lname'][0];
+    toolTip = list[0]['fname'] + ' ' +list[0]['lname'];
+    setState(() {
+     isLoading=false; 
+    });
+  } else{
+    setState(() {
+     isLoading=true; 
+    });
+  }
 
   return Scaffold(
       appBar: AppBar(
@@ -101,7 +110,7 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
         ),
       
       bottomNavigationBar: FABBottomAppBar(
-        centerItemText: list[_getIndex(list)]['fname'][0],
+        centerItemText: centerItemText,
         color: Colors.grey,
         selectedColor: Colors.red,
         notchedShape: CircularNotchedRectangle(),
@@ -120,11 +129,11 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
         //isExtended: true,
         mini: false,
         elevation: 4,
-        tooltip: list[_getIndex(list)]['fname'] + " " +list[_getIndex(list)]['lname'],
+        tooltip: toolTip,
         child: Text(Calender().getTime()),
       ),
       drawer: Drawer(
-        child: DrawerMenu(list:list,index: _getIndex(list),),
+        child: DrawerMenu(list:list),
       ),
     );
   }

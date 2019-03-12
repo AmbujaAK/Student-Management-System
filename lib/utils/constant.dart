@@ -1,4 +1,12 @@
 class Constant {
+  String userId;
+  String loggedInUserUrl;
+
+  Constant(String userId){
+    this.userId = userId;
+    loggedInUserUrl = url + "getLoggedInUser.php?username=" + userId;
+    print(loggedInUserUrl);
+  }
   static String url = "https://demoprojectjuit.000webhostapp.com/flutter/";
   
   static String loginUrl = url + "login.php";

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import './tabs/tabs.dart';
 import './nav/bottomNavigation.dart';
 class MyHomePage extends StatefulWidget {
   final String userId;
@@ -13,6 +12,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     //return Tabs(userId: widget.userId,);
-    return BottomNavigation(userId: widget.userId,);
+    return BottomNavigation(userId: widget.userId);
   }
 }

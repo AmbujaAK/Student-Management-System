@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Profile extends StatelessWidget {
   final List list;
   final int index;
-  Profile({Key key, this.list, this.index});
+  Profile({Key key, this.list, this.index=0});
 
   @override
   Widget build(BuildContext context) {
