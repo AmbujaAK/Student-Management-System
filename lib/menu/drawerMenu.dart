@@ -15,6 +15,22 @@ class DrawerMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textColor =Colors.black;
+    final iconColor = Colors.black;
+    final bgColor = Colors.white;
+    final btnColor = Colors.white;
+    final btnTextColor =Colors.redAccent;
+    final shadowColor =Colors.black12;
+    final cCompleted = Colors.redAccent;
+    final cRemaining =Colors.black12;
+
+    final boxShadow = [ BoxShadow(
+        color: shadowColor,
+        blurRadius: 5.0,
+        spreadRadius: 2.0,
+        offset: Offset(3.0, 3.0)
+      ),
+    ];
     final GlobalKey<AnimatedCircularChartState> _chartKey1 = new GlobalKey<AnimatedCircularChartState>();
     final GlobalKey<AnimatedCircularChartState> _chartKey2 = new GlobalKey<AnimatedCircularChartState>();
     
@@ -38,12 +54,12 @@ class DrawerMenu extends StatelessWidget {
           <CircularSegmentEntry>[
             new CircularSegmentEntry(
               33.33,
-              Colors.blue[400],
+              cCompleted,
               rankKey: 'completed',
             ),
             new CircularSegmentEntry(
               66.67,
-              Colors.red,
+              cRemaining,
               rankKey: 'remaining',
             ),
           ],
@@ -54,7 +70,7 @@ class DrawerMenu extends StatelessWidget {
       percentageValues: true,
       holeLabel: '33',
       labelStyle: new TextStyle(
-        color: Colors.white,
+        color: textColor,
         fontWeight: FontWeight.bold,
         fontSize: 24.0,
       ),
@@ -68,12 +84,12 @@ class DrawerMenu extends StatelessWidget {
           <CircularSegmentEntry>[
             new CircularSegmentEntry(
               20.00,
-              Colors.blue[400],
+              cCompleted,
               rankKey: 'completed',
             ),
             new CircularSegmentEntry(
               80.00,
-              Colors.red,
+              cRemaining,
               rankKey: 'remaining',
             ),
           ],
@@ -84,18 +100,18 @@ class DrawerMenu extends StatelessWidget {
       percentageValues: true,
       holeLabel: '20',
       labelStyle: new TextStyle(
-        color: Colors.white,
+        color: textColor,
         fontWeight: FontWeight.bold,
         fontSize: 24.0,
       ),
     );  
 
     var attendance =ListTile(
-      leading: Icon(Icons.class_,color: Colors.white,),
+      leading: Icon(Icons.class_,color: iconColor,),
       title: Text(
         'Attendance',
         style: TextStyle(
-          color: Colors.white
+          color: textColor
         ),
       ),
       onTap: () {
@@ -108,7 +124,7 @@ class DrawerMenu extends StatelessWidget {
     );
 
     return Container(
-      color: Colors.redAccent,
+      color: bgColor,
       child: ListView(
         //padding: EdgeInsets.zero,
         children: <Widget>[
@@ -120,7 +136,8 @@ class DrawerMenu extends StatelessWidget {
                   height: 150,
                   width: 100,
                   decoration: BoxDecoration(
-                    color: Colors.redAccent,
+                    color: bgColor,
+                    boxShadow: boxShadow,
                     image: DecorationImage(
                       image: NetworkImage(this.list[this.index]['img_url']),
                       fit: BoxFit.cover
@@ -134,7 +151,7 @@ class DrawerMenu extends StatelessWidget {
                     height: 150,
                     width: 160,
                     decoration: BoxDecoration(
-                      color: Colors.redAccent,
+                      color: bgColor,
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     child: Padding(
@@ -148,7 +165,7 @@ class DrawerMenu extends StatelessWidget {
                             child: Text(
                               this.list[this.index]['fname'] + " " +this.list[this.index]['lname'],
                               style: TextStyle(
-                                color: Colors.white,
+                                color: textColor,
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.bold,
                                 ),
@@ -160,7 +177,7 @@ class DrawerMenu extends StatelessWidget {
                             child: Text(
                               this.list[this.index]['student_id'],
                               style: TextStyle(
-                                color: Colors.white70,
+                                color: Colors.black54,
                                 fontSize: 15.0,
                                 ),
                               ),
@@ -170,7 +187,8 @@ class DrawerMenu extends StatelessWidget {
                             height: 30.0,
                             width: 150,
                             decoration: BoxDecoration(
-                              color: Colors.red,
+                              color: btnColor,
+                              boxShadow: boxShadow,
                               borderRadius: BorderRadius.circular(30.0)
                             ),
                             child: Align(
@@ -182,13 +200,13 @@ class DrawerMenu extends StatelessWidget {
                                     child: Text(
                                       "edit information",
                                       style: TextStyle(
-                                        color: Colors.yellowAccent,
+                                        color: btnTextColor,
                                       ),
                                     ),
                                   ),
                                   Icon(
                                     Icons.arrow_forward,
-                                    color: Colors.yellow,
+                                    color: btnTextColor,
                                   ),
                                 ],
                               )
@@ -203,21 +221,21 @@ class DrawerMenu extends StatelessWidget {
             ),
 
             decoration: BoxDecoration(
-              color: Colors.redAccent
+              color: bgColor
             ),
           ),
 
           Padding(
             padding: const EdgeInsets.fromLTRB(8.0,0.0,0.0,0.0),
             child: Material(
-              color: Colors.redAccent,
+              color: bgColor,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Container(
                     alignment: Alignment(-1, 0),
                     decoration: BoxDecoration(
-                      color: Colors.redAccent,
+                      color: bgColor,
                       borderRadius: BorderRadius.circular(12.0),
                     ),
                     child: Padding(
@@ -225,7 +243,7 @@ class DrawerMenu extends StatelessWidget {
                       child: Text(
                         "My Recent Activities",
                         style: TextStyle(
-                          color: Colors.white,
+                          color: textColor,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -234,7 +252,7 @@ class DrawerMenu extends StatelessWidget {
                   SizedBox(height: 2.0,),
                   Container(
                     decoration: BoxDecoration(
-                      color: Colors.redAccent,
+                      color: bgColor,
                       borderRadius: BorderRadius.circular(12.0),
                     ),
                     height: 120,
@@ -248,7 +266,7 @@ class DrawerMenu extends StatelessWidget {
                               Text(
                                 "Attendance",
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: textColor,
                                   fontWeight: FontWeight.bold
                                 ),
                               ),
@@ -262,7 +280,7 @@ class DrawerMenu extends StatelessWidget {
                               Text(
                                 "Project",
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: textColor,
                                   fontWeight: FontWeight.bold
                                 ),
                               ),
@@ -282,12 +300,12 @@ class DrawerMenu extends StatelessWidget {
           ListTile(
             leading: Icon(
               Icons.dashboard,
-              color: Colors.white,
+              color: iconColor,
             ),
             title: Text(
               'My Account',
               style: TextStyle(
-                color: Colors.white
+                color: textColor
               ),
             ),
             onTap: () {
@@ -295,11 +313,11 @@ class DrawerMenu extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.person,color: Colors.white,),
+            leading: Icon(Icons.person,color: iconColor,),
             title: Text(
               'Students',
               style: TextStyle(
-                color: Colors.white
+                color: textColor
               ),
             ),
             onTap: () {
@@ -312,11 +330,11 @@ class DrawerMenu extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.person_outline,color: Colors.white,),
+            leading: Icon(Icons.person_outline,color: iconColor,),
             title: Text(
               'Faculty',
               style: TextStyle(
-                color: Colors.white
+                color: textColor
               ),
             ),
             onTap: () {
@@ -329,11 +347,11 @@ class DrawerMenu extends StatelessWidget {
           ),
           attendance,
           ListTile(
-            leading: Icon(Icons.notifications,color: Colors.white,),
+            leading: Icon(Icons.notifications,color: iconColor,),
             title: Text(
               'Notifications',
               style: TextStyle(
-                color: Colors.white
+                color: textColor
               ),
             ),
             onTap: () {
@@ -345,11 +363,11 @@ class DrawerMenu extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.inbox,color: Colors.white,),
+            leading: Icon(Icons.inbox,color: iconColor,),
             title: Text(
               'inbox',
               style: TextStyle(
-                color: Colors.white
+                color: textColor
               ),
             ),
             onTap: () {
@@ -357,11 +375,11 @@ class DrawerMenu extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.settings,color: Colors.white,),
+            leading: Icon(Icons.settings,color: iconColor,),
             title: Text(
               'Settings',
               style: TextStyle(
-                color: Colors.white
+                color: textColor
               ),
             ),
             onTap: () {
@@ -370,11 +388,11 @@ class DrawerMenu extends StatelessWidget {
           ),
 
           ListTile(
-            leading: Icon(Icons.info,color: Colors.white,),
+            leading: Icon(Icons.info,color: iconColor,),
             title: Text(
               'About',
               style: TextStyle(
-                color: Colors.white
+                color: textColor
               ),
             ),
             onTap: () {
@@ -388,11 +406,11 @@ class DrawerMenu extends StatelessWidget {
               minWidth: 150,
               height: 48,
               child: RaisedButton(
-                color: Colors.red,
+                color: btnColor,
                 child: Text(
                   "Log Out",
                   style: TextStyle(
-                    color: Colors.yellowAccent
+                    color: btnTextColor
                   ),
                 ),
                 onPressed: (){

@@ -2,6 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart' show CalendarCarousel;
 
 class Calender extends StatefulWidget {
+  String getTime(){
+    return DateTime.now().toString().substring(11,16);
+  }
+  String getDate(){
+    return TimeOfDay.now().toString().substring(0);
+  }
+  
   @override
   CalenderState createState() => new CalenderState();
 }

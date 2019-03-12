@@ -21,9 +21,10 @@ class BottomNavigation extends StatefulWidget {
 
 class _BottomNavigationState extends State<BottomNavigation> with TickerProviderStateMixin {
 
-  List list = List();
+  //List list = List();
+  List list;
   var isLoading =true;
-  int tabIndex = 0;  
+  int tabIndex;  
   
   _fetchData() async {
     setState(() {
@@ -45,7 +46,7 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
   String name = "";
   @override
   void initState() {
-    tabIndex = 0;
+      tabIndex = 0;
     getUserId().then(updateUserId);
     _fetchData();
     super.initState();
@@ -69,18 +70,20 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
   }
 
   void _selectedTab(int index) {
-    setState(() {
-      tabIndex =index;
-    });
+    if(index < 4){
+      setState(() {
+        tabIndex =index;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
 
   List<Widget> tabs = [
+    Home1(name: "Ambuj",),
+    Home1(name: "Kumar",),
     Calender(),
-    Home1(name: "Ambuja",),
-    Home1(name: "Aashish",),
     Profile(list: list, index: _getIndex(list),),
   ];
 
@@ -94,11 +97,11 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
       body: isLoading ?
         Center(child: CircularProgressIndicator()) :
         Center(
-          child: tabs[tabIndex],
+          child: tabIndex == null ? tabs[0] : tabs[tabIndex],
         ),
       
       bottomNavigationBar: FABBottomAppBar(
-        centerItemText: ' ',
+        centerItemText: list[_getIndex(list)]['fname'][0],
         color: Colors.grey,
         selectedColor: Colors.red,
         notchedShape: CircularNotchedRectangle(),
@@ -118,7 +121,7 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
         mini: false,
         elevation: 4,
         tooltip: list[_getIndex(list)]['fname'] + " " +list[_getIndex(list)]['lname'],
-        child: Text(list[_getIndex(list)]['fname'][0]),
+        child: Text(Calender().getTime()),
       ),
       drawer: Drawer(
         child: DrawerMenu(list:list,index: _getIndex(list),),

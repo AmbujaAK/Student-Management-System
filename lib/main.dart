@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: SplashAnimation(),
       theme: ThemeData(
-        primaryColor: Colors.redAccent,
+        primaryColor: Colors.white,
       ),
     );
   }
