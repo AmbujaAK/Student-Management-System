@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../FrontWidget/timeTableDialog.dart';
 
 class TimeTable extends StatefulWidget {
 
@@ -32,20 +33,25 @@ class _TimeTableState extends State<TimeTable> {
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(8.0,8.0,4.0,4.0),
-      child: Container(
-        height: 200.0,
-        width: 400.0,
-        child: Material(
-          color: Colors.white,
-          elevation: 5.0,
-          borderRadius: BorderRadius.circular(15.0),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                image,
-              ],
-            )
+      child: GestureDetector(
+        onDoubleTap: (){
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => TimeTableDialog(),
+          ));
+        },
+        child: Hero(
+          tag: "timetable",
+          child: Container(
+            height: 200.0,
+            width: 400.0,
+            child: Material(
+              color: Colors.white,
+              elevation: 5.0,
+              borderRadius: BorderRadius.circular(15.0),
+              child: Center(
+                child: image,
+              ),
+            ),
           ),
         ),
       ),
