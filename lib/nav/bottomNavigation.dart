@@ -10,6 +10,7 @@ import '../nav/fab_bottom_app_bar.dart';
 import '../attendance/calendar.dart';
 import 'home1.dart';
 import '../student/Profile.dart';
+import '../FrontWidget/Dashboard.dart';
 
 class BottomNavigation extends StatefulWidget {
   final String userId;
@@ -33,7 +34,6 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
      isLoading =true;
     });
     
-    //String _url = 'https://demoprojectjuit.000webhostapp.com/flutter/getLoggedInUser.php?username=AmbujaAK';
     String url = Constant(widget.userId).loggedInUserUrl;
     final response = await http.get(url);
 
@@ -76,7 +76,7 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
   Widget build(BuildContext context) {
 
   List<Widget> tabs = [
-    Home1(name: "Ambuj",),
+    Dashboard(),
     Home1(name: "Kumar",),
     Calender(),
     Profile(list: list),
