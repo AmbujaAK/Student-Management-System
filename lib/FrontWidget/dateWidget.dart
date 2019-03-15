@@ -5,10 +5,15 @@ import '../FrontWidget/dateItem.dart';
 class DateWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var currentdate = new DateTime.utc(2018,3,1);
-    var currMonth= new DateTime.now().month;
+    DateTime currentdate = new DateTime.now();
+    var calender= new DateTime.now();
 
-    print(currMonth);
+    _getDate(int index){
+      currentdate =DateTime.utc(calender.year, calender.month, calender.day + index);
+      return currentdate.day;
+    }
+
+    print(calender);
 
     return  Container(
           height: 100.0,
@@ -22,7 +27,10 @@ class DateWidget extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: <Widget>[
-                    DateItem(currentDate: currentdate.day+index, index: index,),
+                    DateItem(
+                      currentDate: _getDate(index),
+                      index: index,
+                    ),
                   ],
                 ),
               );

@@ -19,7 +19,7 @@ class _DateItemState extends State<DateItem> {
   @override
   Widget build(BuildContext context) {
 
-    var dayArrya =["SUN","MON","TUE","WED","THUS","FRI","SAT"];
+    var dayArray =["SUN","MON","TUE","WED","THUS","FRI","SAT"];
 
     var date =widget.currentDate;
     var currDate =DateTime.now().day;
@@ -37,7 +37,7 @@ class _DateItemState extends State<DateItem> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Text(
-                  dayArrya[(widget.index + 3)% 7],
+                  dayArray[(widget.index + 6)% 7],
                   style: TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
