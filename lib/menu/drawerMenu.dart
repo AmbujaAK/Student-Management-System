@@ -8,6 +8,7 @@ import '../auth/loginApp.dart';
 import '../attendance/attendance.dart';
 import '../announcement/announcements.dart';
 import '../animation/flipAnimation.dart';
+import '../profile/editProfile.dart';
 
 class DrawerMenu extends StatelessWidget {
   final List list;
@@ -113,23 +114,36 @@ class DrawerMenu extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30.0)
                       ),
                       child: Align(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(6.0,0.0,0.0,0.0),
-                              child: Text(
-                                "edit information",
-                                style: TextStyle(
-                                  color: btnTextColor,
+                        child: InkWell(
+                          onTap: (){
+                            Navigator.of(context).pop();
+                            Navigator
+                              .of(context)
+                              .push(
+                                MaterialPageRoute(
+                                  builder: (context) => EditProfile(),
+                                  fullscreenDialog: true,
+                                ),
+                            );
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(5.0,0.0,0.0,0.0),
+                                child: Text(
+                                  "edit information",
+                                  style: TextStyle(
+                                    color: btnTextColor,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Icon(
-                              Icons.arrow_forward,
-                              color: btnTextColor,
-                            ),
-                          ],
+                              Icon(
+                                Icons.arrow_forward,
+                                color: btnTextColor,
+                              ),
+                            ],
+                          ),
                         )
                       ),
                     )
