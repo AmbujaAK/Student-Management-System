@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../FrontWidget/dateWidget.dart';
 import '../FrontWidget/timeTable.dart';
 import '../FrontWidget/newsFeed.dart';
-import '../FrontWidget/TempList.dart';
 
 class Dashboard extends StatelessWidget {
 
@@ -14,9 +13,9 @@ class Dashboard extends StatelessWidget {
       child: Column(
         children: <Widget>[
           DateWidget(),
+          NewsFeed(color: Colors.white),
           TimeTable(),
           NewsFeed(),
-          TempList(),
         ],
       ),
     );
