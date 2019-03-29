@@ -1,30 +1,48 @@
 import 'package:flutter/material.dart';
-import 'dropdown.dart';
 import 'takeAttendance.dart';
+import 'pickBatch.dart';
 
-class Attendance extends StatelessWidget {
+class Attendance extends StatefulWidget {
+  @override
+  _AttendanceState createState() => _AttendanceState();
+}
 
+class _AttendanceState extends State<Attendance> {
+  DateTime _dateTime;
+  int _semester;
+
+  @override
+  void initState() {
+    super.initState();
+    _semester = 1;
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Attendance"),
       ),
-      body: Container(
+      body: Center(
         child: Column(
+          verticalDirection: VerticalDirection.down,
           children: <Widget>[
+            SizedBox(height: 20.0),
             Container(
-              /* Horizontal row */
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    DropDown(),
-                    DropDown(),
-                    DropDown()
-                  ],
-                ),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: new ListTile(
+                      leading: new Icon(Icons.today, color: Colors.grey[500]),
+                      title: new PickBatch(
+                        semester: _semester,
+                        dateTime: _dateTime,
+                        onChanged: (dateTime) => setState(() => _dateTime = dateTime),
+                        onSemChanged: (semester) => setState(() => _semester=semester),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
 
@@ -46,7 +64,7 @@ class Attendance extends StatelessWidget {
                       ),
                       onPressed: (){
                         Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => TakeAttendance(),
+                          builder: (context) => TakeAttendance(semester: _semester,),
                         ));
                       },
                     ),
