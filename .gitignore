@@ -3,6 +3,7 @@
 *.classpath
 *.project
 *.sh
+google-services.json
 
 # Miscellaneous
 *.class
