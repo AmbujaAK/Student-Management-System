@@ -8,11 +8,12 @@ class TimeTableDialog extends StatefulWidget {
 
 class TimeTableDialogState extends State<TimeTableDialog> {
 
+  static String timeTable = "assets/images/TT_IT_4_2.jpeg";
   var image2 =Container(
     child: PhotoView(
       heroTag: "timetable",
       controller: PhotoViewController(),
-      imageProvider: AssetImage('assets/images/ambuja.jpg'),
+      imageProvider: AssetImage(timeTable),
       enableRotation: true,
     ),
   );

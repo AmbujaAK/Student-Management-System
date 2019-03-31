@@ -8,6 +8,8 @@ class TimeTable extends StatefulWidget {
 }
 
 class _TimeTableState extends State<TimeTable> {
+
+  String timeTable="assets/images/TT_IT_4_2.jpeg";
   @override
   Widget build(BuildContext context) {
     var image = Container(
@@ -24,7 +26,7 @@ class _TimeTableState extends State<TimeTable> {
           ),
         ],
         image: DecorationImage(
-          image: AssetImage('assets/images/ambuja.jpg'),
+          image: AssetImage(timeTable),
           fit: BoxFit.cover
         ),
         borderRadius: BorderRadius.all(Radius.circular(10.0)),
