@@ -9,6 +9,7 @@ import '../attendance/attendance.dart';
 import '../announcement/announcements.dart';
 import '../animation/flipAnimation.dart';
 import '../profile/editProfile.dart';
+import '../attendance/attendance1.dart';
 
 class DrawerMenu extends StatelessWidget {
   final List list;
@@ -306,6 +307,13 @@ class DrawerMenu extends StatelessWidget {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => Attendance(),
+          )
+        );
+      },
+      onLongPress: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => Attendance1(),
           )
         );
       },
