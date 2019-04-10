@@ -28,16 +28,18 @@ class _FacultyListState extends State<FacultyList> {
       appBar: AppBar(
         title: Text("Faculty"),
       ),
-      body: FutureBuilder<List>(
-        future: getData(),
-        builder: (context, index){
-          if(index.hasError)
-            print("error !!");
-          if(index.hasData)
-            return FacultyListItem(list :index.data);
-          else
-            return Center(child: CircularProgressIndicator()); 
-        },
+      body: Container(
+        child: FutureBuilder<List>(
+          future: getData(),
+          builder: (context, index){
+            if(index.hasError)
+              print("error !!");
+            if(index.hasData)
+              return FacultyListItem(list :index.data);
+            else
+              return Center(child: CircularProgressIndicator()); 
+          },
+        ),
       ),
     );
   }

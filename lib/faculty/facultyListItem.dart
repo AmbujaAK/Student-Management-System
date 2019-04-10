@@ -14,11 +14,19 @@ class FacultyListItem extends StatelessWidget {
         return Hero(
           tag: list[index]['faculty_id'],
           child: Card(
+            elevation: 2.0,
             child: ListTile(
               leading: Container(
                 height: 60,
                 width: 60,
-                child: Image.network(list[index]['img_url'])
+                decoration: BoxDecoration(
+                  color: Colors.redAccent,
+                  image: DecorationImage(
+                    image: NetworkImage(list[index]['img_url']),
+                    fit: BoxFit.cover
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                ),
               ),
               title: Text(list[index]['fname'] + " " +list[index]['lname']),
               subtitle: Text(list[index]['email']),
