@@ -11,7 +11,19 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: SplashAnimation(),
       theme: ThemeData(
-        primaryColor: Colors.white,
+        primaryColor: Colors.redAccent,
+        appBarTheme: AppBarTheme(
+          color: Colors.white,
+          textTheme: TextTheme(
+            title: TextStyle(
+              color: Colors.black,
+              fontSize: 18.0,
+            )
+          ),
+          iconTheme: IconThemeData(
+            color: Colors.black
+          )
+        ),
       ),
     );
   }

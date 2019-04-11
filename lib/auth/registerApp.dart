@@ -73,10 +73,18 @@ class _RegisterAppState extends State<RegisterApp> {
       controller: widget.userId,
       style: TextStyle(color: Colors.grey),
       decoration: InputDecoration(
+        prefixIcon: Padding(
+          padding: EdgeInsets.all(2.0),
+          child: Icon(
+            Icons.security,
+            color: Colors.grey,
+          ),
+        ),
+        labelText: 'Student Id',
         hintText: 'Student Id',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32.0),
+          borderRadius: BorderRadius.circular(12.0),
         )
       )
     );
@@ -86,10 +94,18 @@ class _RegisterAppState extends State<RegisterApp> {
       //initialValue: 'AmbujaAK',
       controller: username,
       decoration: InputDecoration(
+        prefixIcon: Padding(
+          padding: EdgeInsets.all(2.0),
+          child: Icon(
+            Icons.person,
+            color: Colors.red,
+          ),
+        ),
+        labelText: 'Username',
         hintText: 'Username',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32.0),
+          borderRadius: BorderRadius.circular(12.0),
         )
       )
     );
@@ -99,10 +115,18 @@ class _RegisterAppState extends State<RegisterApp> {
       //initialValue: 'Ambuj',
       controller: firstname,
       decoration: InputDecoration(
+        prefixIcon: Padding(
+          padding: EdgeInsets.all(2.0),
+          child: Icon(
+            Icons.text_fields,
+            color: Colors.red,
+          ),
+        ),
+        labelText: 'First name',
         hintText: 'First name',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32.0),
+          borderRadius: BorderRadius.circular(12.0),
         )
       )
     );
@@ -112,10 +136,18 @@ class _RegisterAppState extends State<RegisterApp> {
       //initialValue: '',
       controller: middlename,
       decoration: InputDecoration(
+        prefixIcon: Padding(
+          padding: EdgeInsets.all(2.0),
+          child: Icon(
+            Icons.text_fields,
+            color: Colors.red,
+          ),
+        ),
+        labelText: 'Middle name',
         hintText: 'Middle name',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32.0),
+          borderRadius: BorderRadius.circular(12.0),
         )
       )
     );
@@ -125,10 +157,18 @@ class _RegisterAppState extends State<RegisterApp> {
       //initialValue: 'Kumar',
       controller: lastname,
       decoration: InputDecoration(
+        prefixIcon: Padding(
+          padding: EdgeInsets.all(2.0),
+          child: Icon(
+            Icons.text_fields,
+            color: Colors.red,
+          ),
+        ),
+        labelText: 'Last name',
         hintText: 'Last name',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32.0),
+          borderRadius: BorderRadius.circular(12.0),
         )
       )
     );
@@ -138,10 +178,18 @@ class _RegisterAppState extends State<RegisterApp> {
       //initialValue: 'itsambuja@gmail.com',
       controller: email,
       decoration: InputDecoration(
+        prefixIcon: Padding(
+          padding: EdgeInsets.all(2.0),
+          child: Icon(
+            Icons.mail,
+            color: Colors.red,
+          ),
+        ),
+        labelText: 'email',
         hintText: 'email',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32.0),
+          borderRadius: BorderRadius.circular(12.0),
         )
       )
     );
@@ -151,10 +199,18 @@ class _RegisterAppState extends State<RegisterApp> {
       //initialValue: '8935802059',
       controller: mobile,
       decoration: InputDecoration(
+        prefixIcon: Padding(
+          padding: EdgeInsets.all(2.0),
+          child: Icon(
+            Icons.phone,
+            color: Colors.red,
+          ),
+        ),
+        labelText: 'mobile',
         hintText: 'mobile',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32.0),
+          borderRadius: BorderRadius.circular(12.0),
         )
       )
     );
@@ -165,10 +221,18 @@ class _RegisterAppState extends State<RegisterApp> {
       controller: password,
       obscureText: true,
       decoration: InputDecoration(
+        prefixIcon: Padding(
+          padding: EdgeInsets.all(2.0),
+          child: Icon(
+            Icons.security,
+            color: Colors.red,
+          ),
+        ),
+        labelText: 'password',
         hintText: 'Password',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32.0),
+          borderRadius: BorderRadius.circular(12.0),
         )
       )
     );
@@ -178,10 +242,18 @@ class _RegisterAppState extends State<RegisterApp> {
       //initialValue: '04/01/1997',
       controller: dob,
       decoration: InputDecoration(
+        prefixIcon: Padding(
+          padding: EdgeInsets.all(2.0),
+          child: Icon(
+            Icons.date_range,
+            color: Colors.red,
+          ),
+        ),
+        labelText: 'D.O.B',
         hintText: 'D.O.B',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32.0),
+          borderRadius: BorderRadius.circular(12.0),
         )
       )
     );
@@ -191,10 +263,18 @@ class _RegisterAppState extends State<RegisterApp> {
       //initialValue: '17/08/2015',
       controller: username,
       decoration: InputDecoration(
+        prefixIcon: Padding(
+          padding: EdgeInsets.all(2.0),
+          child: Icon(
+            Icons.date_range,
+            color: Colors.red,
+          ),
+        ),
+        labelText: 'Join Date',
         hintText: 'Join Date',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32.0),
+          borderRadius: BorderRadius.circular(12.0),
         )
       )
     );
@@ -323,17 +403,9 @@ class _RegisterAppState extends State<RegisterApp> {
                 SizedBox(height: 8.0,),
                 passwordApp,
                 SizedBox(height: 8.0,),
-                dobApp,
-                SizedBox(height: 8.0,),
                 joindateApp,
                 SizedBox(height: 8.0,),
-                imgUrlApp,
-                SizedBox(height: 8.0,),
-                githubLinkApp,
-                SizedBox(height: 8.0,),
-                linkedinLinkApp,
-                SizedBox(height: 8.0,),
-                websiteLinkApp,
+
                 SizedBox(height: 24.0,),
                 registerButton,
 

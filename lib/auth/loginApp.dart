@@ -62,11 +62,19 @@ class _LoginAppState extends State<LoginApp> {
       //initialValue: 'AmbujaAK',
       controller: username,
       decoration: InputDecoration(
-        hintText: 'Username',
+        prefixIcon: Padding(
+          padding: EdgeInsets.all(2.0),
+          child: Icon(
+            Icons.person,
+            color:  Colors.red,
+          ),
+        ),
+        labelText: 'username',
+        hintText: 'username',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32.0),
-        )
+          borderRadius: BorderRadius.circular(12.0),
+        ),
       )
     );
     
@@ -76,10 +84,18 @@ class _LoginAppState extends State<LoginApp> {
       controller: password,
       obscureText: true,
       decoration: InputDecoration(
+        prefixIcon: Padding(
+          padding: EdgeInsets.all(2.0),
+          child: Icon(
+            Icons.security,
+            color: Colors.red,
+          ),
+        ),
+        labelText: 'password',
         hintText: 'Password',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32.0),
+          borderRadius: BorderRadius.circular(12.0),
         )
       )
     );

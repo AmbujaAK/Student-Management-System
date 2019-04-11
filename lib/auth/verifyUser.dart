@@ -58,10 +58,18 @@ class _VerifyUserState extends State<VerifyUser> {
       autofocus: false,
       controller: userId,
       decoration: InputDecoration(
+        prefixIcon: Padding(
+          padding: EdgeInsets.all(2.0),
+          child: Icon(
+            Icons.security,
+            color: Colors.red,
+          ),
+        ),
+        labelText: 'userId',
         hintText: 'userId',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32.0),
+          borderRadius: BorderRadius.circular(12.0),
         )
       )
     );
