@@ -25,12 +25,14 @@ class _LoginAppState extends State<LoginApp> {
     });
 
     var datauser = json.decode(response.body);
-    //print(datauser['status']);
+    
     if(datauser['status'] == "false"){
+      print(datauser);
       setState(() {
        message = datauser['message']; 
       });
     }else{
+      print(datauser);
       setState(() {
       status = datauser['status'];
       message = datauser['message'];
