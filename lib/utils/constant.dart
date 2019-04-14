@@ -18,5 +18,11 @@ class Constant {
   static String departmentUrl = serverUrl + "getDepartment.php";
   static String updateStudentUrl = serverUrl + "updateStudent.php";
   static String changePasswordUrl = serverUrl + "changePassword.php";
+  static String getSubjects = serverUrl + "getSubject.php";
+  static String updateAttendance = serverUrl + "updateAttendance.php";
+  static String getYear = serverUrl + "getYear.php";
+  static String getSemester = serverUrl + "getSemester.php";
+  static String getAttendanceSheet = serverUrl + "getAttendanceSheet.php";
+  static String getAttendanceSheet1 = serverUrl + "getAttendanceSheet1.php";
   
 }
