@@ -6,6 +6,7 @@ import '../myHome.dart';
 import '../utils/sharedPref.dart';
 import '../utils/constant.dart';
 import 'verifyUser.dart';
+import 'forgetPassword.dart';
 
 class LoginApp extends StatefulWidget {
   @override
@@ -125,7 +126,11 @@ class _LoginAppState extends State<LoginApp> {
     final forgotLabel = FlatButton(
       child: Text('Forget Password ?', style: TextStyle(color: Colors.black54)),
       onPressed: () {
-
+        Navigator
+        .of(context)
+        .push(MaterialPageRoute(
+          builder: (context) => ForgetPassword()
+        ));
       },
     );
 
