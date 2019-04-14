@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'takeAttendance.dart';
-import 'pickBatch.dart';
+import 'dialogButton.dart';
+import '../utils/constant.dart';
+import 'getDepartment.dart';
+import 'chooseSubject.dart';
 
 class Attendance extends StatefulWidget {
   @override
@@ -8,73 +10,52 @@ class Attendance extends StatefulWidget {
 }
 
 class _AttendanceState extends State<Attendance> {
-  DateTime _dateTime;
-  int _semester;
-
-  @override
-  void initState() {
-    super.initState();
-    _semester = 1;
-  }
+  TextEditingController department = new TextEditingController();
+  TextEditingController year = new TextEditingController();
+  TextEditingController semester = new TextEditingController();
   
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("Attendance"),
+        title: Text('Attendace'),
       ),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
         child: Column(
-          verticalDirection: VerticalDirection.down,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            SizedBox(height: 20.0),
-            Container(
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: new ListTile(
-                      leading: new Icon(Icons.today, color: Colors.grey[500]),
-                      title: new PickBatch(
-                        semester: _semester,
-                        dateTime: _dateTime,
-                        onChanged: (dateTime) => setState(() => _dateTime = dateTime),
-                        onSemChanged: (semester) => setState(() => _semester=semester),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            SizedBox(height: 60.0,),
-            Container(
-              height: 400,
-              width: 400,
-              child: Center(
-                child: Container(
-                  alignment: Alignment(0, 0),
-                  child: Material(
-                    elevation: 5.0,
-                    color: Colors.yellowAccent,
-                    shadowColor: Colors.redAccent,
-                    borderRadius: BorderRadius.circular(30.0),
-                    child: MaterialButton(
-                      child: Text(
-                        "Take Attendance"
-                      ),
-                      onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => TakeAttendance(semester: _semester,),
-                        ));
-                      },
-                    ),
-                  ),
-                ),
-              ),
-            )
+            GetDepartment(icon: Icon(Icons.book, color: Colors.redAccent,), boxName: "department", input: department, url: Constant.departmentUrl),
+            SizedBox(height: 8.0,),
+            DialogButton(icon: Icon(Icons.book, color: Colors.redAccent,), boxName: "year", input: year,url: Constant.getYear),
+            SizedBox(height: 8.0,),
+            DialogButton(icon: Icon(Icons.book, color: Colors.redAccent,), boxName: "semester", input: semester,url: Constant.getSemester),
+            SizedBox(height: 8.0,),
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Colors.redAccent,
+        label: Text('Choose Subject',style: TextStyle(color: Colors.yellowAccent)),
+        icon: Icon(Icons.search,color: Colors.yellowAccent),
+        isExtended: true,
+        onPressed: (){
+          Navigator
+          .of(context)
+          .push(
+            MaterialPageRoute(
+              builder: (context) => ChooseSubject(
+                department: department.text,
+                year: year.text,
+                semester: semester.text,
+              ),
+            )
+          );
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

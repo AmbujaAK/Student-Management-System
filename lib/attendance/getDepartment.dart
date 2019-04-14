@@ -3,18 +3,20 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
-class DialogButton extends StatefulWidget {
+class GetDepartment extends StatefulWidget {
   final String boxName;
   final String url;
   final TextEditingController input ;
   final Icon icon;
-  DialogButton({Key key,this.boxName, this.url,this.input,this.icon});
+  GetDepartment({Key key,this.boxName, this.url,this.input,this.icon});
 
   @override
-  _DialogButtonState createState() => _DialogButtonState();
+  _GetDepartmentState createState() => _GetDepartmentState();
 }
 
-class _DialogButtonState extends State<DialogButton> {
+class _GetDepartmentState extends State<GetDepartment> {
+  String department = "";
+
 _showButtonDialog(BuildContext context,String url){
   Future<List> getData() async{
     final response = await http.get(url);
@@ -52,6 +54,12 @@ _showButtonDialog(BuildContext context,String url){
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onEditingComplete: (){
+        setState(() {
+          department = widget.input.text;
+          print(department); 
+        });
+      },
       autofocus: false,
       controller: widget.input,
       decoration: InputDecoration(
@@ -93,7 +101,6 @@ class DialogItem extends StatefulWidget {
 }
 
 class _DialogItemState extends State<DialogItem> {
-  
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -102,12 +109,12 @@ class _DialogItemState extends State<DialogItem> {
         return InkWell(
           onTap: (){
             setState(() {
-             widget.input.text = widget.list[index]['_id'];
+             widget.input.text = widget.list[index]['dname'];
              Navigator.pop(context);
             });
           },
           child: ListTile(
-            title: Text(widget.list[index]['_id']),
+            title: Text(widget.list[index]['dname']),
           ),
         );
       },

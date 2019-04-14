@@ -1,98 +1,68 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import '../utils/constant.dart';
+import 'studentListItem.dart';
 
 class TakeAttendance extends StatefulWidget {
-  final int semester;
-  TakeAttendance({Key key, this.semester});
+  final String department;
+  final String year;
+  final String semester;
+  final String subject;
+  
+  TakeAttendance({Key key,this.department,this.year,this.semester,this.subject});
 
   @override
   _TakeAttendanceState createState() => _TakeAttendanceState();
 }
 
 class _TakeAttendanceState extends State<TakeAttendance> {
-  Firestore firestore =Firestore();
+  String attendance_id;
+  String subject_id;
+  Future<List> getData() async{
+    final response = await http.get(Constant.studentUrl);
+    
+    return json.decode(response.body);
+  }
+
+  _getAttendanceSheet() async {
+    final res = await http.post(Constant.getAttendanceSheet1,body:{
+      "department" : widget.department,
+      "year" : widget.year,
+      "semester" : widget.semester,
+      "subject" : widget.subject
+    });
+    var sheet = json.decode(res.body);
+    print(sheet[0]);
+    attendance_id = sheet[0]['attendance_id'];
+    subject_id = sheet[0]['subject_id'];
+
+    print(attendance_id);
+    print(subject_id);
+  }
 
   @override
   void initState() {
     super.initState();
-    firestore.settings(timestampsInSnapshotsEnabled: true);
+    _getAttendanceSheet();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Course Name"),
+        title: Text('take attendance'),
       ),
-      body: _buildBody(context, widget.semester),
+      body: FutureBuilder<List>(
+                future: getData(),
+                builder: (context, index){
+                  if(index.hasError)
+                    print("error !!");
+                  if(index.hasData)
+                    return StudentListItem(list :index.data);
+                  else
+                    return Center(child: CircularProgressIndicator()); 
+                },
+              ),
     );
   }
-}
-
-Widget _buildBody(BuildContext context, int semester){
-  return StreamBuilder<QuerySnapshot>(
-    stream: Firestore.instance.collection('Students').snapshots(),
-    builder: (context,snapshot) {
-      if (!snapshot.hasData) return Center(child: CircularProgressIndicator());
-
-      return _buildList(context, snapshot.data.documents,semester);
-    },
-  );
-  
-}
-
-Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot, int semester){
-  return ListView(
-    padding: EdgeInsets.only(top: 20.0),
-    children: snapshot.map(
-      (data) => _buildListItem(context,data,semester)
-    ).toList(),
-  );
-}
-
-Widget _buildListItem(BuildContext context, DocumentSnapshot data, int semester){
-  final record = Record.fromSnapshot(data,semester);
-
-  return Padding(
-    key: ValueKey(record.name),
-    padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-    child: Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.red),
-        borderRadius: BorderRadius.circular(5.0),
-      ),
-      child: ListTile(
-        title: Text(record.name),
-        trailing: Text(record.attendSem.toString()),
-         onTap: () => Firestore.instance.runTransaction((transaction) async {
-           final freshSnapshot = await transaction.get(record.reference);
-            final fresh = Record.fromSnapshot(freshSnapshot,semester);
-            
-            await transaction
-            .update(record.reference, {'attendSem$semester': fresh.attendSem + 1});
-         }),
-      ),
-    ),
-  );
-}
-
-class Record {
-  final int roll;
-  final String name;
-  final int attendSem;
-  final DocumentReference reference;
-
-  Record.fromMap(Map<String, dynamic> map,int sem, {this.reference})
-      : assert(map['name'] != null),
-        assert(map['roll'] != null),
-        assert(map['attendSem$sem'] !=null),
-        name = map['name'],
-        roll = map['roll'],
-        attendSem = map['attendSem$sem'];
-
-  Record.fromSnapshot(DocumentSnapshot snapshot, int sem)
-      : this.fromMap(snapshot.data,sem, reference: snapshot.reference);
-
-  @override
-  String toString() => "Record<$name:$attendSem>";
 }
