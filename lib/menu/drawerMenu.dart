@@ -8,8 +8,9 @@ import '../auth/loginApp.dart';
 import '../attendance/attendance.dart';
 import '../announcement/announcements.dart';
 import '../animation/flipAnimation.dart';
-import '../profile/editProfile.dart';
-import '../attendance/attendance1.dart';
+import '../profile/editStudentProfile.dart';
+//import '../firebase/attendance.dart';
+import 'about.dart';
 
 class DrawerMenu extends StatelessWidget {
   final List list;
@@ -91,8 +92,8 @@ class DrawerMenu extends StatelessWidget {
                           color: textColor,
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
-                          ),
                         ),
+                      ),
                     ),
                     Container(
                       height: 30.0,
@@ -122,7 +123,7 @@ class DrawerMenu extends StatelessWidget {
                               .of(context)
                               .push(
                                 MaterialPageRoute(
-                                  builder: (context) => EditProfile(),
+                                  builder: (context) => EditStudentProfile(list: list,),
                                   fullscreenDialog: true,
                                 ),
                             );
@@ -304,16 +305,12 @@ class DrawerMenu extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => Attendance(),
-          )
-        );
+
       },
       onLongPress: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => Attendance1(),
+            builder: (context) => Attendance(),
           )
         );
       },
@@ -422,7 +419,11 @@ class DrawerMenu extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.pop(context);
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => About(),
+          )
+        );
       },
     );
 
