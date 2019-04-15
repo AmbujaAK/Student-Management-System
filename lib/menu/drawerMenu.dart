@@ -5,12 +5,12 @@ import '../student/studentList.dart';
 import '../faculty/facultyList.dart';
 import '../utils/sharedPref.dart';
 import '../auth/loginApp.dart';
-import '../attendance/attendance.dart';
 import '../announcement/announcements.dart';
 import '../animation/flipAnimation.dart';
 import '../profile/editStudentProfile.dart';
 //import '../firebase/attendance.dart';
 import 'about.dart';
+import '../attendance/attendanceOption.dart';
 
 class DrawerMenu extends StatelessWidget {
   final List list;
@@ -310,7 +310,7 @@ class DrawerMenu extends StatelessWidget {
       onLongPress: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => Attendance(),
+            builder: (context) => AttendanceOption(),
           )
         );
       },
