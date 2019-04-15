@@ -34,7 +34,6 @@ _showButtonDialog(BuildContext context,String url){
       "year" : widget.year,
       "semester" : widget.semester
     });
-    
     return json.decode(response.body);
   }
   showDialog(

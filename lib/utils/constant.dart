@@ -23,6 +23,9 @@ class Constant {
   static String getYear = serverUrl + "getYear.php";
   static String getSemester = serverUrl + "getSemester.php";
   static String getAttendanceSheet = serverUrl + "getAttendanceSheet.php";
-  static String getAttendanceSheet1 = serverUrl + "getAttendanceSheet1.php";
+  static String getAttendanceSheetId = serverUrl + "getAttendanceSheetId.php";
+  static String getStudentForAttendanceUrl = serverUrl + "getStudentForAttendance.php";
+  static String takeAttendanceOnAvailableUrl = serverUrl + "takeAttendanceOnAvailable.php";
+  static String createAttendanceUrl = serverUrl + "createAttendance.php";
   
 }

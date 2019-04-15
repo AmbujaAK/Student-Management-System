@@ -3,21 +3,31 @@ import 'package:flutter/material.dart';
 class StudentListItem extends StatefulWidget {
   final List list;
   final int index;
-  StudentListItem({Key key, this.list, this.index}):super(key:key);
+  final List presentStudentIdRecord;
+  StudentListItem({
+    Key key, 
+    this.list, 
+    this.index,
+    this.presentStudentIdRecord,
+    }):super(key:key);
 
   @override
   _StudentListItemState createState() => _StudentListItemState();
 }
 
 class _StudentListItemState extends State<StudentListItem> {
-  bool isPresent = false;
+  //List _presentStudentIdRecord = List();
 
-  void _value1Changed(bool value) => setState(() => isPresent = value);
-
-  @override
-  void initState() {
-    super.initState();
-    isPresent = false;
+  void _onStudentSelected(bool selected, studentId) {
+    if (selected == true) {
+      setState(() {
+        widget.presentStudentIdRecord.add(studentId);
+      });
+    } else {
+      setState(() {
+        widget.presentStudentIdRecord.remove(studentId);
+      });
+    }
   }
   @override
   Widget build(BuildContext context) {
@@ -39,13 +49,13 @@ class _StudentListItemState extends State<StudentListItem> {
                 borderRadius: BorderRadius.all(Radius.circular(30.0)),
               ),
             ),
-            title: Text(widget.list[index]['fname'] + " " +widget.list[index]['lname']),
+            title: Text(widget.list[index]['name']),
             subtitle: Text(widget.list[index]['student_id']),
             trailing: Checkbox(
-              activeColor: Colors.redAccent,
-              value: isPresent,
-              onChanged: _value1Changed,
-              checkColor: Colors.redAccent,
+              value: widget.presentStudentIdRecord.contains(widget.list[index]['student_id']),
+              onChanged: (bool selected){
+                _onStudentSelected(selected, widget.list[index]['student_id']);
+              },
             ),
           ),
         );
