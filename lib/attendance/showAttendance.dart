@@ -5,26 +5,31 @@ import 'package:http/http.dart' as http;
 import '../utils/constant.dart';
 import 'studentListItem.dart';
 
-class UpdateAttendance extends StatefulWidget {
+class ShowAttendance extends StatefulWidget {
   final String department;
   final String year;
   final String semester;
   final String subject;
+  final String attendanceId;
+  final String joinDate;
   final String type;
-  UpdateAttendance({
+  
+  ShowAttendance({
     Key key,
     this.department,
     this.year,
     this.semester,
     this.subject,
+    this.attendanceId,
+    this.joinDate,
     this.type,
   });
 
   @override
-  _UpdateAttendanceState createState() => _UpdateAttendanceState();
+  _ShowAttendanceState createState() => _ShowAttendanceState();
 }
 
-class _UpdateAttendanceState extends State<UpdateAttendance> {
+class _ShowAttendanceState extends State<ShowAttendance> {
   
   List data = List();
   List _presentStudentIdRecord = List();
@@ -34,27 +39,10 @@ class _UpdateAttendanceState extends State<UpdateAttendance> {
       "department" : widget.department,
       "year" : widget.year,
       "semester" : widget.semester,
-      "subject" : widget.subject
+      "subject" : widget.subject,
     });
     data = json.decode(response.body);
     return json.decode(response.body);
-  }
-
-  Map map;
-  _takeAttendance() async {
-    int len = _presentStudentIdRecord.length;
-    
-    for(int i=0; i<len; i++){
-      final res = await http.post(Constant.takeAttendanceOnAvailableUrl,body: {
-        "department" : widget.department,
-        "year" : widget.year,
-        "semester" : widget.semester,
-        "subject" : widget.subject,
-        "present_student_id" : _presentStudentIdRecord[i]
-      });
-      map = json.decode(res.body);
-    }
-    print(map);
   }
 
   @override
@@ -68,12 +56,11 @@ class _UpdateAttendanceState extends State<UpdateAttendance> {
       ],
       onSelected: (_){
         print(_presentStudentIdRecord);
-        _takeAttendance();
       },
     );
     return Scaffold(
       appBar: AppBar(
-        title: Text('data'),
+        title: Text('Student List'),
         actions: <Widget>[
           popButton
         ],

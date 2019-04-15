@@ -4,11 +4,13 @@ class StudentListItem extends StatefulWidget {
   final List list;
   final int index;
   final List presentStudentIdRecord;
+  final String type;
   StudentListItem({
     Key key, 
     this.list, 
     this.index,
     this.presentStudentIdRecord,
+    this.type,
     }):super(key:key);
 
   @override
@@ -51,12 +53,15 @@ class _StudentListItemState extends State<StudentListItem> {
             ),
             title: Text(widget.list[index]['name']),
             subtitle: Text(widget.list[index]['student_id']),
-            trailing: Checkbox(
+            //trailing: widget.type == "update" ? _checkBox(index) : countBox,
+            trailing: widget.type == "update" 
+            ? Checkbox(
               value: widget.presentStudentIdRecord.contains(widget.list[index]['student_id']),
               onChanged: (bool selected){
                 _onStudentSelected(selected, widget.list[index]['student_id']);
               },
-            ),
+            )
+            : Text(widget.list[index]['total_attendance']),
           ),
         );
       },

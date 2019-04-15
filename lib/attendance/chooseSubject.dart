@@ -4,9 +4,8 @@ import 'updateAttendance.dart';
 import 'getSubject.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'ViewAttendance.dart';
 import 'attendanceOption.dart';
-
+import 'showAttendance.dart';
 
 class ChooseSubject extends StatefulWidget {
   final String department;
@@ -89,11 +88,14 @@ class _ChooseSubjectState extends State<ChooseSubject> {
         .of(context)
         .push(
           MaterialPageRoute(
-            builder: (context) => ViewAttendance(
+            builder: (context) => ShowAttendance(
               department: widget.department,
               year: widget.year,
               semester: widget.semester,
+              attendanceId: widget.attendanceId,
+              joinDate: widget.joinDate,
               subject: subject.text,
+              type: widget.type,
             )
           )
         );
@@ -107,6 +109,7 @@ class _ChooseSubjectState extends State<ChooseSubject> {
               year: widget.year,
               semester: widget.semester,
               subject: subject.text,
+              type: widget.type,
             )
           )
         );
