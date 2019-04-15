@@ -1,68 +1,65 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+import 'dialogButton.dart';
 import '../utils/constant.dart';
-import 'studentListItem.dart';
+import 'getDepartment.dart';
+import 'chooseSubject.dart';
 
 class TakeAttendance extends StatefulWidget {
-  final String department;
-  final String year;
-  final String semester;
-  final String subject;
-  
-  TakeAttendance({Key key,this.department,this.year,this.semester,this.subject});
+  final String type;
+  TakeAttendance({Key key, this.type});
 
   @override
   _TakeAttendanceState createState() => _TakeAttendanceState();
 }
 
 class _TakeAttendanceState extends State<TakeAttendance> {
-  String attendance_id;
-  String subject_id;
-  Future<List> getData() async{
-    final response = await http.get(Constant.studentUrl);
-    
-    return json.decode(response.body);
-  }
-
-  _getAttendanceSheet() async {
-    final res = await http.post(Constant.getAttendanceSheet1,body:{
-      "department" : widget.department,
-      "year" : widget.year,
-      "semester" : widget.semester,
-      "subject" : widget.subject
-    });
-    var sheet = json.decode(res.body);
-    print(sheet[0]);
-    attendance_id = sheet[0]['attendance_id'];
-    subject_id = sheet[0]['subject_id'];
-
-    print(attendance_id);
-    print(subject_id);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _getAttendanceSheet();
-  }
+  TextEditingController department = new TextEditingController();
+  TextEditingController year = new TextEditingController();
+  TextEditingController semester = new TextEditingController();
+  
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('take attendance'),
+        title: Text('Attendance'),
       ),
-      body: FutureBuilder<List>(
-                future: getData(),
-                builder: (context, index){
-                  if(index.hasError)
-                    print("error !!");
-                  if(index.hasData)
-                    return StudentListItem(list :index.data);
-                  else
-                    return Center(child: CircularProgressIndicator()); 
-                },
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            GetDepartment(icon: Icon(Icons.book, color: Colors.redAccent,), boxName: "department", input: department, url: Constant.departmentUrl),
+            SizedBox(height: 8.0,),
+            DialogButton(icon: Icon(Icons.book, color: Colors.redAccent,), boxName: "year", input: year,url: Constant.getYear),
+            SizedBox(height: 8.0,),
+            DialogButton(icon: Icon(Icons.book, color: Colors.redAccent,), boxName: "semester", input: semester,url: Constant.getSemester),
+            SizedBox(height: 8.0,),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Colors.redAccent,
+        label: Text('Choose Subject',style: TextStyle(color: Colors.yellowAccent)),
+        icon: Icon(Icons.search,color: Colors.yellowAccent),
+        isExtended: true,
+        onPressed: (){
+          Navigator
+          .of(context)
+          .push(
+            MaterialPageRoute(
+              builder: (context) => ChooseSubject(
+                type: widget.type,
+                department: department.text,
+                year: year.text,
+                semester: semester.text,
               ),
+            )
+          );
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
