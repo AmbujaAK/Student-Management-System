@@ -305,9 +305,6 @@ class DrawerMenu extends StatelessWidget {
         ),
       ),
       onTap: () {
-
-      },
-      onLongPress: () {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => AttendanceOption(),
