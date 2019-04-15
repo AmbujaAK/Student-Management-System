@@ -7,6 +7,11 @@ class AttendanceOption extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    Color btnColor = Colors.white;
+    Color textColor = Colors.redAccent;
+    Color borderColor = Colors.black12;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Attendance Board'),
@@ -18,14 +23,16 @@ class AttendanceOption extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             RaisedButton(
+              padding: EdgeInsets.all(12),
+              highlightColor: Colors.redAccent,
               shape: StadiumBorder(
                 side: BorderSide(
                   width: 2.0,
-                  color: Colors.redAccent,
+                  color: borderColor,
                   style: BorderStyle.solid
                 )
               ),
-              color: Colors.white,
+              color: btnColor,
               onPressed: (){
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -33,17 +40,25 @@ class AttendanceOption extends StatelessWidget {
                   )
                 );
               },
-              child: Text("Create New Attendance Table"),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Create New Attendance Table",
+                  style: TextStyle(color: textColor),
+                ),
+              ),
             ),
+            SizedBox(height: 4.0),
             RaisedButton(
+              padding: EdgeInsets.all(12),
               shape: StadiumBorder(
                 side: BorderSide(
                   width: 2.0,
-                  color: Colors.redAccent,
+                  color: borderColor,
                   style: BorderStyle.solid
                 )
               ),
-              color: Colors.white,
+              color: btnColor,
               onPressed: (){
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -51,17 +66,25 @@ class AttendanceOption extends StatelessWidget {
                   )
                 );
               },
-              child: Text("Take Attendance"),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Take Attendance",
+                  style: TextStyle(color: textColor),
+                ),
+              ),
             ),
+            SizedBox(height: 4.0),
             RaisedButton(
+              padding: EdgeInsets.all(12),
               shape: StadiumBorder(
                 side: BorderSide(
                   width: 2.0,
-                  color: Colors.redAccent,
+                  color: borderColor,
                   style: BorderStyle.solid
                 )
               ),
-              color: Colors.white,
+              color: btnColor,
               onPressed: (){
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -69,7 +92,13 @@ class AttendanceOption extends StatelessWidget {
                   )
                 );
               },
-              child: Text("View Attendance"),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "View Attendance",
+                  style: TextStyle(color: textColor),
+                ),
+              ),
             ),
           ],
         ),
