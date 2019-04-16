@@ -14,9 +14,11 @@ import '../FrontWidget/Dashboard.dart';
 
 class BottomNavigation extends StatefulWidget {
   final String userId;
+  final String userType;
   BottomNavigation({
     Key key,
     this.userId,
+    this.userType,
   });
 
   @override
@@ -33,8 +35,7 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
     setState(() {
      isLoading =true;
     });
-    
-    String url = Constant(widget.userId).loggedInUserUrl;
+    String url = Constant(widget.userType, widget.userId).loggedInUserUrl;
     final response = await http.get(url);
 
     if(response.statusCode == 200){
@@ -49,11 +50,13 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
   }
 
   String name = "";
+  String user = "";
   @override
   void initState() {
     print(list);
       tabIndex = 0;
     getUserId().then(updateUserId);
+    getUserType().then(updateUserType);
     _fetchData();
     super.initState();
   }
@@ -61,6 +64,13 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
   void updateUserId(String usename){
     setState(() {
      name = usename;
+     print(name);
+    });
+  }
+  void updateUserType(String userType){
+    setState(() {
+     user = userType;
+     print(user);
     });
   }
 
@@ -133,7 +143,7 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
         child: Text(Calender().getTime()),
       ),
       drawer: Drawer(
-        child: DrawerMenu(list:list),
+        child: DrawerMenu(list:list,userType: widget.userType,),
       ),
     );
   }

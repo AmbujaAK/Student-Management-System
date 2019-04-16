@@ -44,11 +44,20 @@ class _SplashAnimationState extends State<SplashAnimation> with SingleTickerProv
 
   void goToHomePage(String status){
     if(status == "true"){
+      getUserType().then((String userType){
+        getUserId().then((String userId){
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) => MyHomePage(userType: userType, userId: userId,),
+          ));
+        });
+      });
+/*
       getUserId().then((String userId) {
         Navigator.push(context, MaterialPageRoute(
           builder: (context) => MyHomePage(userId: userId,),
         ));
       });
+*/
     }else{
       Navigator.push(context, MaterialPageRoute(
         builder: (context) => LoginAnimation(loginApp: LoginApp(),),

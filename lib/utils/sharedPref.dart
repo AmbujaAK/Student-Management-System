@@ -4,9 +4,10 @@ import 'dart:async';
 
 class SharedPref {
   String userId;
-  SharedPref({Key key, this.userId});
+  String userType;
+  SharedPref({Key key, this.userId,this.userType});
 }
-
+/*
 Future<bool> saveUserId(String userId, String status) async {
   SharedPreferences pref = await SharedPreferences.getInstance();
   pref.setString("userId", userId);
@@ -14,12 +15,27 @@ Future<bool> saveUserId(String userId, String status) async {
   
   return pref.commit();
 }
-
+*/
+Future<bool> saveUserId(String userType, String userId, String status) async {
+  SharedPreferences pref = await SharedPreferences.getInstance();
+  pref.setString("userId", userId);
+  pref.setString("userType", userType);
+  pref.setString("status", status);
+  
+  return pref.commit();
+}
 Future<String> getUserId() async {
   SharedPreferences pref = await SharedPreferences.getInstance();
   String userId = pref.getString("userId");
 
   return userId;
+}
+
+Future<String> getUserType() async {
+  SharedPreferences pref = await SharedPreferences.getInstance();
+  String userType = pref.getString("userType");
+
+  return userType;
 }
 
 Future<String> getLoginStatus() async {

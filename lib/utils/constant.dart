@@ -1,11 +1,16 @@
 class Constant {
   String userId;
+  String userType;
   String loggedInUserUrl;
 
-  Constant(String userId){
+  Constant(String userType, String userId){
+    this.userType = userType;
     this.userId = userId;
-    loggedInUserUrl = serverUrl + "getLoggedInUser.php?username=" + userId;
-    print(loggedInUserUrl);
+    if(userType == "faculty"){
+      loggedInUserUrl = "https://demoprojectjuit.000webhostapp.com/flutter/loggedInUser.php?username=" + userId + "&userType=faculty";
+    }else
+      loggedInUserUrl = serverUrl + "loggedInUser.php?username=" + userId + "&userType=" + userType;
+    print("logged in for $loggedInUserUrl");
   }
   static String serverUrl = "https://demoprojectjuit.000webhostapp.com/flutter/";
   //static String serverUrl = "https://192.168.0.101/jusms/flutter/";

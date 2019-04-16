@@ -19,12 +19,21 @@ class _LoginAppState extends State<LoginApp> {
 
   String message = "";
   String status = "";
+  List<DropdownMenuItem<String>> userOption = [];
+  String selectedItem = null;
+
+  @override
+  void initState() {
+    super.initState();
+    loadUserType();
+  }
   void login() async {
     final response = await http.post(Constant.loginUrl, body: {
       "username" : username.text,
       "password" : password.text,
+      "userType" : selectedItem,
     });
-
+    debugPrint(selectedItem);
     var datauser = json.decode(response.body);
     
     if(datauser['status'] == "false"){
@@ -39,14 +48,26 @@ class _LoginAppState extends State<LoginApp> {
       message = datauser['message'];
       });
       String userId = username.text;
-      saveUserId(userId,status).then((bool committed) {
+      String userType = selectedItem;
+      saveUserId(userType,userId,status).then((bool committed) {
         Navigator.push(context, MaterialPageRoute(
-          builder: (context) => MyHomePage(userId: userId),
+          builder: (context) => MyHomePage(userType: userType, userId: userId),
         ));
       });
     }
   }
 
+  void loadUserType(){
+    userOption = [];
+    userOption.add(new DropdownMenuItem(
+      child: new Text("As a student"),
+      value: "students",
+    ));
+    userOption.add(new DropdownMenuItem(
+      child: new Text("As a faculty"),
+      value: "faculty",
+    ));
+  }
   @override
   Widget build(BuildContext context) {
     final logoJU =Image.asset('assets/images/logo1.png');
@@ -57,6 +78,35 @@ class _LoginAppState extends State<LoginApp> {
         backgroundColor: Colors.transparent,
         radius: 48.0,
         child: logoJU
+      ),
+    );
+
+    final userType = Container(
+      width: 40,
+      decoration: BoxDecoration(
+        border: Border.all(),
+        borderRadius: BorderRadius.circular(12.0)
+      ),
+      child: Center(
+        child: DropdownButtonHideUnderline(
+          child: DropdownButton(
+            style: TextStyle(
+              color: Colors.redAccent,
+              fontSize: 15
+            ),
+            isExpanded: false,
+            iconSize: 0,
+            items: userOption,
+            value: selectedItem,
+            hint: new Text('select user type'),
+            onChanged: (value) {
+              print('selected : $value');
+              setState(() {
+                selectedItem = value;
+              });
+            },
+          ),
+        ),
       ),
     );
 
@@ -168,8 +218,11 @@ class _LoginAppState extends State<LoginApp> {
               shrinkWrap: true,
               padding: EdgeInsets.only(left: 24.0, right: 24.0),
               children: <Widget>[
+                SizedBox(height: 18.0,),
                 logo,
-                SizedBox(height: 48.0,),
+                SizedBox(height: 38.0,),
+                userType,
+                SizedBox(height: 8.0,),
                 usernameApp,
                 SizedBox(height: 8.0,),
                 passwordApp,

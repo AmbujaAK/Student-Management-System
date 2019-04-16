@@ -4,7 +4,8 @@ import 'createAttendance.dart';
 import 'ViewAttendance.dart';
 
 class AttendanceOption extends StatelessWidget {
-
+  final String userType;
+  AttendanceOption({Key key, this.userType});
   @override
   Widget build(BuildContext context) {
 
@@ -22,7 +23,8 @@ class AttendanceOption extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            RaisedButton(
+            userType == "faculty"
+            ? RaisedButton(
               padding: EdgeInsets.all(12),
               highlightColor: Colors.redAccent,
               shape: StadiumBorder(
@@ -47,9 +49,10 @@ class AttendanceOption extends StatelessWidget {
                   style: TextStyle(color: textColor),
                 ),
               ),
-            ),
+            ) :
             SizedBox(height: 4.0),
-            RaisedButton(
+            userType == "faculty"
+            ? RaisedButton(
               padding: EdgeInsets.all(12),
               shape: StadiumBorder(
                 side: BorderSide(
@@ -73,7 +76,7 @@ class AttendanceOption extends StatelessWidget {
                   style: TextStyle(color: textColor),
                 ),
               ),
-            ),
+            ) :
             SizedBox(height: 4.0),
             RaisedButton(
               padding: EdgeInsets.all(12),

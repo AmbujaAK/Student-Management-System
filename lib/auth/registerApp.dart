@@ -7,7 +7,8 @@ import '../utils/constant.dart';
 
 class RegisterApp extends StatefulWidget {
   final TextEditingController userId;
-  RegisterApp({Key key, this.userId});
+  final String userType;
+  RegisterApp({Key key, this.userId,this.userType});
 
   @override
   _RegisterAppState createState() => _RegisterAppState();
@@ -27,6 +28,9 @@ class _RegisterAppState extends State<RegisterApp> {
   TextEditingController dob = new TextEditingController();
   TextEditingController joindate = new TextEditingController();
 
+  List<DropdownMenuItem<String>> userOption = [];
+  String selectedItem = null;
+
   String status = "";
   String message = "";
 
@@ -34,6 +38,19 @@ class _RegisterAppState extends State<RegisterApp> {
   void initState() {
     super.initState();
     studentId = widget.userId;
+    loadUserType();
+  }
+
+  void loadUserType(){
+    userOption = [];
+    userOption.add(new DropdownMenuItem(
+      child: new Text("As a student"),
+      value: "students",
+    ));
+    userOption.add(new DropdownMenuItem(
+      child: new Text("As a faculty"),
+      value: "faculty",
+    ));
   }
 
   DateTime _initialDate = new DateTime.now();
@@ -154,6 +171,35 @@ class _RegisterAppState extends State<RegisterApp> {
         radius: 48.0,
         //child: FlutterLogo(),
         child: logoJU
+      ),
+    );
+
+    final userType = Container(
+      width: 40,
+      decoration: BoxDecoration(
+        border: Border.all(),
+        borderRadius: BorderRadius.circular(12.0)
+      ),
+      child: Center(
+        child: DropdownButtonHideUnderline(
+          child: DropdownButton(
+            style: TextStyle(
+              color: Colors.grey,
+              fontSize: 15
+            ),
+            isExpanded: false,
+            iconSize: 0,
+            items: userOption,
+            value: widget.userType,
+            //hint: new Text('select user type'),
+            onChanged: (value) {
+              print('selected : $value');
+              setState(() {
+                selectedItem = value;
+              });
+            },
+          ),
+        ),
       ),
     );
 
@@ -513,9 +559,11 @@ class _RegisterAppState extends State<RegisterApp> {
               shrinkWrap: true,
               padding: EdgeInsets.only(left: 24.0, right: 24.0),
               children: <Widget>[
-                SizedBox(height: 24.0,),
+                SizedBox(height: 18.0,),
                 logo,
-                SizedBox(height: 48.0,),
+                SizedBox(height: 38.0,),
+                userType,
+                SizedBox(height: 8.0,),
                 studentIdApp,
                 SizedBox(height: 8.0,),
                 departmentApp,

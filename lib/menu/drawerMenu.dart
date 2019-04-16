@@ -15,7 +15,8 @@ import '../attendance/attendanceOption.dart';
 class DrawerMenu extends StatelessWidget {
   final List list;
   final int index;
-  DrawerMenu({Key key, this.list, this.index =0});
+  final String userType;
+  DrawerMenu({Key key, this.list, this.index =0,this.userType});
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +100,9 @@ class DrawerMenu extends StatelessWidget {
                       height: 30.0,
                       width: 150.0,
                       child: Text(
-                        this.list[this.index]['student_id'],
+                        this.userType == "students"
+                        ? this.list[this.index]['student_id']
+                        : this.list[this.index]['faculty_id'],
                         style: TextStyle(
                           color: Colors.black54,
                           fontSize: 15.0,
@@ -307,7 +310,7 @@ class DrawerMenu extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => AttendanceOption(),
+            builder: (context) => AttendanceOption(userType: userType),
           )
         );
       },
@@ -453,8 +456,9 @@ class DrawerMenu extends StatelessWidget {
         //padding: EdgeInsets.zero,
         children: <Widget>[
           drawerHeader,
-
-          activities,
+          userType == "students"
+          ? activities
+          :
           
           new Divider(color: Colors.black26, indent: 16.0,),
           

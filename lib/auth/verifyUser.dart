@@ -13,9 +13,17 @@ class VerifyUser extends StatefulWidget {
 
 class _VerifyUserState extends State<VerifyUser> {
   TextEditingController userId = new TextEditingController();
+  List<DropdownMenuItem<String>> userOption = [];
+  String selectedItem = null;
 
   String message = "";
   String status = "";
+
+  @override
+  void initState() {
+    super.initState();
+    loadUserType();
+  }
   void verify() async {
     final response = await http.post(Constant.verifyUrl, body: {
       "user_id" : userId.text,
@@ -33,12 +41,25 @@ class _VerifyUserState extends State<VerifyUser> {
       message = datauser['message'];
       });
       String user = userId.text;
-      saveUserId(user,status).then((bool committed) {
+      String userType = selectedItem;
+      saveUserId(userType,user,status).then((bool committed) {
         Navigator.push(context, MaterialPageRoute(
-          builder: (context) => RegisterApp(userId: userId,),
+          builder: (context) => RegisterApp(userType: selectedItem, userId: userId,),
         ));
       });
     }
+  }
+
+  void loadUserType(){
+    userOption = [];
+    userOption.add(new DropdownMenuItem(
+      child: new Text("As a student"),
+      value: "students",
+    ));
+    userOption.add(new DropdownMenuItem(
+      child: new Text("As a faculty"),
+      value: "faculty",
+    ));
   }
 
   @override
@@ -51,6 +72,35 @@ class _VerifyUserState extends State<VerifyUser> {
         backgroundColor: Colors.transparent,
         radius: 48.0,
         child: logoJU
+      ),
+    );
+    
+    final userType = Container(
+      width: 40,
+      decoration: BoxDecoration(
+        border: Border.all(),
+        borderRadius: BorderRadius.circular(12.0)
+      ),
+      child: Center(
+        child: DropdownButtonHideUnderline(
+          child: DropdownButton(
+            style: TextStyle(
+              color: Colors.redAccent,
+              fontSize: 15
+            ),
+            isExpanded: false,
+            iconSize: 0,
+            items: userOption,
+            value: selectedItem,
+            hint: new Text('select user type'),
+            onChanged: (value) {
+              print('selected : $value');
+              setState(() {
+                selectedItem = value;
+              });
+            },
+          ),
+        ),
       ),
     );
 
@@ -128,8 +178,11 @@ class _VerifyUserState extends State<VerifyUser> {
               shrinkWrap: true,
               padding: EdgeInsets.only(left: 24.0, right: 24.0),
               children: <Widget>[
+                SizedBox(height: 18.0,),
                 logo,
-                SizedBox(height: 48.0,),
+                SizedBox(height: 38.0,),
+                userType,
+                SizedBox(height: 8.0,),                
                 userIdApp,
                 SizedBox(height: 8.0,),
                 error,
