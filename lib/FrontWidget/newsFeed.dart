@@ -19,7 +19,7 @@ class _NewsFeedState extends State<NewsFeed> {
         child: Material(
           type: MaterialType.card,
           color: widget.color,
-          elevation: 2.0,
+          elevation: 1.0,
           borderRadius: BorderRadius.circular(15.0),
           child: Center(
             child: Column(

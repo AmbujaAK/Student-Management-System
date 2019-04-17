@@ -8,10 +8,10 @@ import '../utils/sharedPref.dart';
 import '../utils/constant.dart';
 import '../nav/fab_bottom_app_bar.dart';
 import '../attendance/calendar.dart';
-import 'home1.dart';
-import '../student/Profile.dart';
 import '../FrontWidget/Dashboard.dart';
-
+import '../faculty/facultyList.dart';
+import '../student/studentList.dart';
+import '../project/projectPage.dart';
 class BottomNavigation extends StatefulWidget {
   final String userId;
   final String userType;
@@ -81,15 +81,24 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
       });
     }
   }
-
+  Widget _getTitile(){
+    if(tabIndex == 1)
+      return Text('Student');
+    else if(tabIndex == 2)
+      return Text('Faculty');
+    else if (tabIndex == 3)
+      return Text('Proect');
+    else
+      return Text('Dashboard');
+  }
   @override
   Widget build(BuildContext context) {
 
   List<Widget> tabs = [
     Dashboard(),
-    Home1(name: "Kumar",),
-    Calender(),
-    Profile(list: list),
+    StudentList(),
+    FacultyList(),
+    ProjectPage()
   ];
   var centerItemText;
   var toolTip;
@@ -108,7 +117,7 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
 
   return Scaffold(
       appBar: AppBar(
-        title: Text("Dashboard"),
+        title: _getTitile(),
         actions: <Widget>[
           PopUpMenu(),
         ],
@@ -127,9 +136,9 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
         onTabSelected: _selectedTab,
         items: [
           FABBottomAppBarItem(iconData: Icons.home, text: 'Home'),
-          FABBottomAppBarItem(iconData: Icons.layers, text: 'attend'),
-          FABBottomAppBarItem(iconData: Icons.note, text: 'notes'),
-          FABBottomAppBarItem(iconData: Icons.info, text: 'Info'),
+          FABBottomAppBarItem(iconData: Icons.person, text: 'Students'),
+          FABBottomAppBarItem(iconData: Icons.person_outline, text: 'Faculty'),
+          FABBottomAppBarItem(iconData: Icons.work, text: 'Project'),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -143,7 +152,9 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
         child: Text(Calender().getTime()),
       ),
       drawer: Drawer(
-        child: DrawerMenu(list:list,userType: widget.userType,),
+        child: isLoading
+        ? Center(child: CircularProgressIndicator())
+        : DrawerMenu(list:list,userType: widget.userType,),
       ),
     );
   }

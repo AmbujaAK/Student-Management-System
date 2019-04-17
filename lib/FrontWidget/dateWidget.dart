@@ -8,9 +8,13 @@ class DateWidget extends StatelessWidget {
     DateTime currentdate = new DateTime.now();
     var calender= new DateTime.now();
 
-    _getDate(int index){
+    _getDay(int index){
       currentdate =DateTime.utc(calender.year, calender.month, calender.day + index);
       return currentdate.day;
+    }
+    _getMonth(int index){
+      currentdate =DateTime.utc(calender.year, calender.month, calender.day + index);
+      return currentdate.month;
     }
 
     print(calender);
@@ -28,7 +32,8 @@ class DateWidget extends StatelessWidget {
                 child: Row(
                   children: <Widget>[
                     DateItem(
-                      currentDate: _getDate(index),
+                      currentDate: _getDay(index),
+                      currentMonth: _getMonth(index),
                       index: index,
                     ),
                   ],

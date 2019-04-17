@@ -116,7 +116,7 @@ class DrawerMenu extends StatelessWidget {
                       width: 150,
                       decoration: BoxDecoration(
                         color: btnColor,
-                        boxShadow: boxShadow,
+                        //boxShadow: boxShadow,
                         borderRadius: BorderRadius.circular(30.0)
                       ),
                       child: Align(
@@ -138,15 +138,16 @@ class DrawerMenu extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(5.0,0.0,0.0,0.0),
                                 child: Text(
-                                  "edit information",
+                                  "Edit Information",
                                   style: TextStyle(
                                     color: btnTextColor,
                                   ),
                                 ),
                               ),
                               Icon(
-                                Icons.arrow_forward,
+                                Icons.edit,
                                 color: btnTextColor,
+                                size: 15,
                               ),
                             ],
                           ),
@@ -371,7 +372,7 @@ class DrawerMenu extends StatelessWidget {
     var notificationMenu = ListTile(
       leading: Icon(Icons.notifications,color: iconColor,),
       title: Text(
-        'Notifications',
+        'Announcements',
         style: TextStyle(
           color: textColor
         ),
@@ -382,19 +383,6 @@ class DrawerMenu extends StatelessWidget {
             builder: (context) => Announcement(user: list, userType: userType,),
           )
         );
-      },
-    );
-
-    var inboxMenu = ListTile(
-      leading: Icon(Icons.inbox,color: iconColor,),
-      title: Text(
-        'inbox',
-        style: TextStyle(
-          color: textColor
-        ),
-      ),
-      onTap: () {
-        Navigator.pop(context);
       },
     );
 
@@ -451,7 +439,9 @@ class DrawerMenu extends StatelessWidget {
       ),
     );
 
-    return Container(
+    return list.length == null
+    ? Center(child: CircularProgressIndicator())
+    : Container(
       color: bgColor,
       child: ListView(
         //padding: EdgeInsets.zero,
@@ -461,14 +451,15 @@ class DrawerMenu extends StatelessWidget {
           ? activities
           :
           
-          new Divider(color: Colors.black26, indent: 16.0,),
-          
+          userType == "students"
+          ? new Divider(color: Colors.black26, indent: 16.0,)
+          :
+
           myAccount,
           studentMenu,
           facultyMenu,
           attendance,
           notificationMenu,
-          inboxMenu,
           settingsMenu,
           aboutMenu,
 

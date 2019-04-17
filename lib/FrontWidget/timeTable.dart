@@ -48,7 +48,7 @@ class _TimeTableState extends State<TimeTable> {
             width: 400.0,
             child: Material(
               color: Colors.white,
-              elevation: 5.0,
+              elevation: 1.0,
               borderRadius: BorderRadius.circular(15.0),
               child: Center(
                 child: image,
