@@ -2,6 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FrontWidget extends StatelessWidget {
+  final List list;
+  final String subject;
+  final String eventDay;
+  final String eventTime;
+  final String eventDate;
+  final String location;
+  final String priority;
+  FrontWidget({
+    Key key,
+    this.list,
+    this.subject,
+    this.eventDay,
+    this.eventTime,
+    this.eventDate,
+    this.location,
+    this.priority
+  });
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +47,7 @@ class FrontWidget extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              'Today',
+                              eventDay.toUpperCase().substring(0,3),
                               style: TextStyle(
                                 //color: Color(0xFFc8b6ea),
                                 color: Color(0xffffffff),
@@ -42,7 +60,7 @@ class FrontWidget extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              '09:00AM',
+                              eventTime.toString().substring(0,5) + 'AM',
                               style: TextStyle(
                                 //color: Color(0xFFc8b6ea),
                                 color: Color(0xffffffff),
@@ -74,7 +92,7 @@ class FrontWidget extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "Artificial Intelligence class",
+                        subject,
                         style:TextStyle(
                           color:Color(0xff6a53a4),
                           fontSize: 20.0,
@@ -100,7 +118,7 @@ class FrontWidget extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              "SMCC Building",
+                              location,
                               style: TextStyle(
                                 color: Color(0xffed1bf7),
                                 fontSize: 16.0,

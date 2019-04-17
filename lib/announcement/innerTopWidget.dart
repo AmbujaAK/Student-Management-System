@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 
 class InnerTopWidget extends StatelessWidget {
+  final String details;
+  final List list;
+  InnerTopWidget({
+    Key key,
+    this.list,
+    this.details
+  });
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,17 +39,20 @@ class InnerTopWidget extends StatelessWidget {
           Container(
             child: Row(
               children: <Widget>[
-                Container(), // icon
-                Container() // title
+                Container(
+                  child: Center(
+                    child: Text(
+                      details,
+                      style: TextStyle(
+                        color: Colors.yellowAccent,
+                        fontSize: 20
+                      ),
+                    ),
+                  ),
+                ) // title
               ],
             ),
           ),
-
-          // Duration
-          Container(),
-
-          // Classroom
-          Container(),
         ],
       ),
     );

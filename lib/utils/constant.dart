@@ -32,5 +32,6 @@ class Constant {
   static String getStudentForAttendanceUrl = serverUrl + "getStudentForAttendance.php";
   static String takeAttendanceOnAvailableUrl = serverUrl + "takeAttendanceOnAvailable.php";
   static String createAttendanceUrl = serverUrl + "createAttendance.php";
-  
+  static String getAnnouncementUrl = serverUrl + "getAnnouncement.php";
+  static String addAnnouncementUrl = serverUrl + "addAnnouncement.php";
 }

@@ -20,6 +20,7 @@ class DrawerMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //print(' list :: $list');
     final textColor =Colors.black87;
     final iconColor = Colors.black54;
     final bgColor = Colors.white;
@@ -378,7 +379,7 @@ class DrawerMenu extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => Announcement(),
+            builder: (context) => Announcement(user: list, userType: userType,),
           )
         );
       },
