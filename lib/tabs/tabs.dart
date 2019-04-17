@@ -6,7 +6,6 @@ import '../menu/drawerMenu.dart';
 import '../menu/popUpMenu.dart';
 import '../utils/sharedPref.dart';
 import '../utils/constant.dart';
-import '../student/Profile.dart';
 import '../tabs/home.dart';
 import '../tabs/history.dart';
 
@@ -91,7 +90,6 @@ return Scaffold(
           TabBarView(
             children: <Widget>[
               Home(),
-              Profile(list:list,index: _getIndex(list),),
               Container(
                 child: Column(
                   children: <Widget>[
