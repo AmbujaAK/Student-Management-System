@@ -8,8 +8,8 @@ import '../utils/constant.dart';
 
 class FacultyList extends StatefulWidget {
   final List list;
-
-  FacultyList({Key key, this.list}):super(key:key);
+  final String title;
+  FacultyList({Key key, this.list,this.title}):super(key:key);
 
   @override
   _FacultyListState createState() => _FacultyListState();
@@ -25,9 +25,6 @@ class _FacultyListState extends State<FacultyList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Faculty"),
-      ),
       body: Container(
         child: FutureBuilder<List>(
           future: getData(),

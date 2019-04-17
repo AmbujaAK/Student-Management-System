@@ -7,8 +7,8 @@ import '../utils/constant.dart';
 
 class StudentList extends StatefulWidget {
   final List list;
-
-  StudentList({Key key, this.list}):super(key:key);
+  final String title;
+  StudentList({Key key, this.list, this.title}):super(key:key);
 
   @override
   _StudentListState createState() => _StudentListState();
@@ -24,9 +24,6 @@ class _StudentListState extends State<StudentList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Students"),
-      ),
       body: FutureBuilder<List>(
         future: getData(),
         builder: (context, index){
