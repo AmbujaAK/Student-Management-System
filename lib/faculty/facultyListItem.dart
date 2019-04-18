@@ -14,7 +14,7 @@ class FacultyListItem extends StatelessWidget {
         return Hero(
           tag: list[index]['faculty_id'],
           child: Card(
-            elevation: 2.0,
+            elevation: 1.0,
             child: ListTile(
               leading: Container(
                 height: 60,

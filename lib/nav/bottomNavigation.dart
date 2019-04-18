@@ -87,7 +87,7 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
     else if(tabIndex == 2)
       return Text('Faculty');
     else if (tabIndex == 3)
-      return Text('Proect');
+      return Text('Project');
     else
       return Text('Dashboard');
   }
@@ -121,7 +121,9 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
         actions: <Widget>[
           PopUpMenu(),
         ],
+        elevation: 0.0,
       ),
+      backgroundColor: Colors.white,
       body: isLoading ?
         Center(child: CircularProgressIndicator()) :
         Center(

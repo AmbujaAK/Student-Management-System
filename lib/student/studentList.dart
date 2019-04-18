@@ -24,6 +24,7 @@ class _StudentListState extends State<StudentList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: FutureBuilder<List>(
         future: getData(),
         builder: (context, index){

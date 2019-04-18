@@ -12,8 +12,8 @@ class TempList extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(8.0,8.0,4.0,4.0),
       child: Container(
-        height: _height * 0.28,
-        width: _width * 0.46,
+        height: _height * 0.15,
+        width: _width * 0.95,
         child: Material(
           type: MaterialType.card,
           color: Colors.white,

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../FrontWidget/dateWidget.dart';
-import '../FrontWidget/timeTable.dart';
-import '../FrontWidget/newsFeed.dart';
 import '../FrontWidget/TempList.dart';
+import '../notes/folder.dart';
 
 class Dashboard extends StatelessWidget {
 
@@ -16,12 +15,23 @@ class Dashboard extends StatelessWidget {
           DateWidget(),
           //NewsFeed(color: Colors.white),
           //TimeTable(),
+          TempList(),
           Center(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                TempList(),
-                TempList(),
+                Folder(
+                  iconSize: 40,
+                  folderName: "Study",
+                  heightFactor: 0.20,
+                  widthFactor: .45,
+                ),
+                Folder(
+                  iconSize: 40,
+                  folderName: "Questions",
+                  heightFactor: 0.20,
+                  widthFactor: .45,
+                )
               ],
             ),
           ),
@@ -30,8 +40,18 @@ class Dashboard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                TempList(),
-                TempList(),
+                Folder(
+                  iconSize: 40,
+                  folderName: "PDFs",
+                  heightFactor: 0.20,
+                  widthFactor: .45,
+                ),
+                Folder(
+                  iconSize: 40,
+                  folderName: "Time Table",
+                  heightFactor: 0.20,
+                  widthFactor: .45,
+                )              
               ],
             ),
           ),

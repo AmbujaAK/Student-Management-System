@@ -11,6 +11,7 @@ import '../profile/editStudentProfile.dart';
 //import '../firebase/attendance.dart';
 import 'about.dart';
 import '../attendance/attendanceOption.dart';
+import '../notes/studyMain.dart';
 
 class DrawerMenu extends StatelessWidget {
   final List list;
@@ -369,6 +370,28 @@ class DrawerMenu extends StatelessWidget {
       },
     );
 
+    var notesMenu = ListTile(
+      leading: Icon(Icons.note,color: iconColor,),
+      title: Text(
+        'Notes',
+        style: TextStyle(
+          color: textColor
+        ),
+      ),
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => StudyMain(
+              userId: userType == "students"
+              ? this.list[this.index]['student_id']
+              : this.list[this.index]['faculty_id'],
+              userType: userType
+            ),
+          )
+        );
+      },
+    );
+
     var notificationMenu = ListTile(
       leading: Icon(Icons.notifications,color: iconColor,),
       title: Text(
@@ -458,6 +481,7 @@ class DrawerMenu extends StatelessWidget {
           myAccount,
           studentMenu,
           facultyMenu,
+          notesMenu,
           attendance,
           notificationMenu,
           settingsMenu,
