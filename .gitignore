@@ -4,6 +4,7 @@
 *.project
 *.sh
 google-services.json
+temp/
 
 # Miscellaneous
 *.class
