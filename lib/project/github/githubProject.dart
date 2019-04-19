@@ -42,25 +42,7 @@ class _GithubProjectState extends State<GithubProject> {
     return Scaffold(
       appBar: AppBar(
         elevation: 1.0,
-        title: Container(
-            margin: EdgeInsets.only(top: 2.0),
-            child: Column(
-              children: <Widget>[
-                Text('Github Repos',
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .headline
-                        .apply(color: Colors.white)),
-                Text('Trending',
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .subhead
-                        .apply(color: Colors.white))
-              ],
-            )),
-        centerTitle: true,
+        title: Text('Github Repository'),
         actions: <Widget>[
           IconButton(icon: Icon(Icons.search), onPressed: () {}),
         ],
