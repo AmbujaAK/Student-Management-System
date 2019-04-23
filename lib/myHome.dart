@@ -19,7 +19,7 @@ class _MyHomePageState extends State<MyHomePage> {
   createDir() async {
     Directory baseDir = await getExternalStorageDirectory(); //only for Android
     
-    String dirToBeCreated = "Flutter";
+    String dirToBeCreated = "JUSMS";
     String finalDir = join(baseDir.path, dirToBeCreated);
     
     var dir = Directory(finalDir);
