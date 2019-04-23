@@ -1,37 +1,35 @@
 import 'package:flutter/material.dart';
-import '../menu/notesPopUpMenu.dart';
-import 'yearLayout.dart';
 
 import 'package:flutter_file_manager/flutter_file_manager.dart';
-import 'package:path_provider/path_provider.dart';
-import 'dart:io';
 
-class Notes extends StatefulWidget {
-  final String userId;
-  final String userType;
+import '../menu/notesPopUpMenu.dart';
+
+class YearLayout extends StatefulWidget {
   final String title;
-
-  Notes({
+  final String currPath;
+  YearLayout({
     Key key,
-    this.userId,
-    this.userType,
-    this.title
+    this.title,
+    this.currPath
   });
 
   @override
-  _NotesState createState() => _NotesState();
+  _YearLayoutState createState() => _YearLayoutState();
 }
 
-class _NotesState extends State<Notes> {
-  String currPath;
-
-  _files(String currFolder) async {
-    Directory root = await getExternalStorageDirectory();
-    var files = await FileManager.listDirectories(root.path + "/JUSMS/" + currFolder);
+class _YearLayoutState extends State<YearLayout> {
+  String currPath ;
+  _files(String curr, String folderName) async {
+    //Directory root = await getExternalStorageDirectory();
+    var files = await FileManager.listDirectories(curr + '/'+ folderName);
+    currPath = curr + '/'+ folderName;
     print(files);
-    currPath = root.path + "/JUSMS/" + currFolder;
-    print(currPath);
+    
     return files;
+  }
+
+  int _getLength(String currPath){
+    return currPath.length+1;
   }
 
   @override
@@ -47,7 +45,7 @@ class _NotesState extends State<Notes> {
       ),
       backgroundColor: Colors.red[400],
       body: FutureBuilder(
-        future: _files(widget.title),
+        future: _files(widget.currPath, widget.title),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
@@ -64,19 +62,19 @@ class _NotesState extends State<Notes> {
                       itemBuilder: (context, index) => Card(
                         child: ListTile(
                           leading: Icon(Icons.folder,color: Colors.yellow[700],),
-                          title: Text(snapshot.data[index].absolute.path.toString().substring(32)),
+                          title: Text(snapshot.data[index].absolute.path.toString().substring(_getLength(currPath))),
                           trailing: Icon(Icons.more_vert),
                           onTap: (){
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) => YearLayout(
-                                  title: snapshot.data[index].absolute.path.toString().substring(32), 
-                                  currPath: currPath
+                                  title: snapshot.data[index].absolute.path.toString().substring(_getLength(currPath)),
+                                  currPath: currPath,
                                 )
                               )
                             );
                             print('passing value :: ');
-                            print(snapshot.data[index].absolute.path.toString().substring(32));
+                            print(snapshot.data[index].absolute.path.toString().substring(_getLength(currPath)));
                             print(currPath);
                           },
                         )

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'fileContainer.dart';
 
 class Folder extends StatelessWidget {
   final String widgetType;
@@ -60,6 +61,7 @@ class Folder extends StatelessWidget {
                             child: Text(
                               folderName == null ? "Folder" : folderName,
                               style: TextStyle(
+                                fontSize: folderName.length > 14 ? 10 : 15,
                                 fontWeight: FontWeight.bold
                               ),
                             ),
@@ -67,9 +69,18 @@ class Folder extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 12, 0),
-                      child: addIcon == null ? Text('') : Icon(Icons.add),
+                    InkWell(
+                      onTap: (){
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => FileContainer(title: folderName)
+                          )
+                        );
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 12, 0),
+                        child: addIcon == null ? Text('') : Icon(Icons.add),
+                      ),
                     )
                   ],
                 ),
