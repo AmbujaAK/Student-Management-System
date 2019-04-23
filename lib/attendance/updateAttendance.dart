@@ -73,7 +73,7 @@ class _UpdateAttendanceState extends State<UpdateAttendance> {
     );
     return Scaffold(
       appBar: AppBar(
-        title: Text('data'),
+        title: Text('Student List'),
         actions: <Widget>[
           popButton
         ],

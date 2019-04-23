@@ -49,8 +49,8 @@ class AttendanceOption extends StatelessWidget {
                   style: TextStyle(color: textColor),
                 ),
               ),
-            ) :
-            SizedBox(height: 4.0),
+            ) : Text(''),
+            SizedBox(height: 10.0),
             userType == "faculty"
             ? RaisedButton(
               padding: EdgeInsets.all(12),
@@ -76,8 +76,8 @@ class AttendanceOption extends StatelessWidget {
                   style: TextStyle(color: textColor),
                 ),
               ),
-            ) :
-            SizedBox(height: 4.0),
+            ) : Text(''),
+            SizedBox(height: 10.0),
             RaisedButton(
               padding: EdgeInsets.all(12),
               shape: StadiumBorder(
