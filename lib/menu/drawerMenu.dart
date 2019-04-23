@@ -381,7 +381,8 @@ class DrawerMenu extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => StudyMain(
+            builder: (context) => Notes(
+              title: "Notes",
               userId: userType == "students"
               ? this.list[this.index]['student_id']
               : this.list[this.index]['faculty_id'],
@@ -470,11 +471,11 @@ class DrawerMenu extends StatelessWidget {
         //padding: EdgeInsets.zero,
         children: <Widget>[
           drawerHeader,
-          userType == "students"
+          userType == "student"
           ? activities
           :
           
-          userType == "students"
+          userType == "student"
           ? new Divider(color: Colors.black26, indent: 16.0,)
           :
 
