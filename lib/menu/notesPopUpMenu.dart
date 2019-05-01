@@ -5,9 +5,11 @@ import 'package:path/path.dart';
 
 class NotesPopUpMenu extends StatefulWidget {
   final String currentPath;
+  final String title;
   NotesPopUpMenu({
     Key key,
-    this.currentPath
+    this.currentPath,
+    this.title
   });
   
   @override
@@ -18,11 +20,18 @@ class _NotesPopUpMenuState extends State<NotesPopUpMenu> {
   TextEditingController folderName = new TextEditingController();
 
   createDir(String rootFolder, String folderName) async {
-    Directory baseDir = await getExternalStorageDirectory();
-    rootFolder = "JUSMS/Notes/" + widget.currentPath;
-    print(rootFolder);
+    //Directory baseDir = await getExternalStorageDirectory();
+    print('popup got :: ');
+    print(widget.currentPath);
+    print(widget.title);
+    
+    if(widget.title.toString() == 'null')
+      rootFolder = widget.currentPath ;
+    else
+      rootFolder = widget.currentPath + '/' + widget.title;
+    
     String dirToBeCreated = folderName;
-    String finalDir = join(baseDir.path +'/'+rootFolder+ '/', dirToBeCreated);
+    String finalDir = join(rootFolder+ '/', dirToBeCreated);
     
     var dir = Directory(finalDir);
     bool dirExists = await dir.exists();

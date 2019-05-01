@@ -30,6 +30,7 @@ class _NotesState extends State<Notes> {
     var files = await FileManager.listDirectories(root.path + "/JUSMS/" + currFolder);
     print(files);
     currPath = root.path + "/JUSMS/" + currFolder;
+    print('Notes layout :' + currPath);
     print(currPath);
     return files;
   }
@@ -42,7 +43,7 @@ class _NotesState extends State<Notes> {
         elevation: 0.0,
         backgroundColor: Colors.red[400],
         actions: <Widget>[
-          NotesPopUpMenu(currentPath: widget.title),
+          NotesPopUpMenu(currentPath: currPath),
         ],
       ),
       backgroundColor: Colors.red[400],

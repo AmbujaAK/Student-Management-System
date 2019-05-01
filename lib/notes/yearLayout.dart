@@ -40,7 +40,7 @@ class _YearLayoutState extends State<YearLayout> {
         elevation: 0.0,
         backgroundColor: Colors.red[400],
         actions: <Widget>[
-          NotesPopUpMenu(currentPath: widget.title),
+          NotesPopUpMenu(currentPath: widget.currPath, title: widget.title),
         ],
       ),
       backgroundColor: Colors.red[400],
