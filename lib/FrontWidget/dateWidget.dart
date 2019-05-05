@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../FrontWidget/dateItem.dart';
 
 class DateWidget extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     DateTime currentdate = new DateTime.now();
@@ -17,12 +18,16 @@ class DateWidget extends StatelessWidget {
       return currentdate.month;
     }
 
-    print(calender);
+    _getWeekDay(int index){
+      currentdate =DateTime.utc(calender.year, calender.month, calender.day + index);
+      return currentdate.weekday;
+    }
+    print('calender :: $calender');
 
     return  Container(
           height: 100.0,
           child: ListView.builder(
-            itemCount: 1000,
+            itemCount: 100,
             addSemanticIndexes: bool.fromEnvironment("true"),
             itemBuilder: (context, index){
               var singleChildScrollView = SingleChildScrollView(
@@ -34,6 +39,7 @@ class DateWidget extends StatelessWidget {
                     DateItem(
                       currentDate: _getDay(index),
                       currentMonth: _getMonth(index),
+                      currentWeekDay: _getWeekDay(index),
                       index: index,
                     ),
                   ],

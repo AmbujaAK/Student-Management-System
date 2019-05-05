@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 class DateItem extends StatefulWidget {
   final Color color;
   final currentDate;
+  final currentWeekDay;
   final currentMonth;
   final index;
   DateItem({
     Key key,
     this.color,
     this.currentDate,
+    this.currentWeekDay,
     this.currentMonth,
     this.index,
   }):super(key:key);
@@ -42,7 +44,7 @@ class _DateItemState extends State<DateItem> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Text(
-                  dayArray[(widget.index + 4)% 7],
+                  dayArray[(widget.currentWeekDay) % 7],
                   style: TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
