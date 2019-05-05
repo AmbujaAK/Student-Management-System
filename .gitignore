@@ -5,6 +5,7 @@
 *.sh
 google-services.json
 temp/
+presentaion/
 
 # Miscellaneous
 *.class
