@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:open_file/open_file.dart';
+
+
 class File extends StatelessWidget {
   final String widgetType;
   final int index;
@@ -10,6 +13,7 @@ class File extends StatelessWidget {
   final String fileSize;
   final String title;
   final String currPath;
+  final String filePath;
 
   File({
     Key key,
@@ -21,13 +25,54 @@ class File extends StatelessWidget {
     this.fileType,
     this.fileSize,
     this.title,
-    this.currPath
+    this.currPath,
+    this.filePath
   });
   
   @override
   Widget build(BuildContext context) {
     var _height = MediaQuery.of(context).size.height;
     var _width = MediaQuery.of(context).size.width;
+
+    Widget _getIcon(String fileType){
+      print('FileType :: $fileType');
+      switch (fileType) {
+        case 'pdf':
+          return Icon(
+            Icons.picture_as_pdf,
+            color: Colors.red,
+            size: 20,
+          );
+          break;
+        case 'jpg':
+          return Icon(
+            Icons.image,
+            color: Colors.green,
+            size: 20,
+          );
+          break;
+        case 'jpeg':
+          return Icon(
+            Icons.image,
+            color: Colors.green,
+            size: 20,
+          );
+          break;
+        case 'ppt':
+          return Icon(
+            Icons.slideshow,
+            color: Colors.yellow,
+            size: 20,
+          );
+          break;
+        default:
+          return Icon(
+            Icons.broken_image,
+            color: Colors.blue,
+            size: 20,
+          );
+      }
+    }
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(8.0,8.0,4.0,4.0),
@@ -41,7 +86,11 @@ class File extends StatelessWidget {
           borderRadius: BorderRadius.circular(3.0),
           child: Center(
             child: InkWell(
-              onTap: (){},
+              onTap: (){
+                print('file path :: ');
+                print(filePath);
+                OpenFile.open(filePath);
+              },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
@@ -53,11 +102,7 @@ class File extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: <Widget>[
-                            Icon(
-                              Icons.picture_as_pdf,
-                              color: Colors.red,
-                              size: 20.0
-                            ),
+                            _getIcon(fileType),
                             Padding(
                               padding: const EdgeInsets.fromLTRB(12, 0, 0, 0),
                               child: Column(

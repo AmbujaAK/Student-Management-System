@@ -60,7 +60,7 @@ class _NotesContainerState extends State<NotesContainer> {
           bottom: TabBar(
             tabs: <Widget>[
               Tab(icon: Icon(Icons.folder)),
-              Tab(icon: Icon(Icons.picture_as_pdf))
+              Tab(icon: Icon(Icons.folder_open))
             ],
           ),
         ),
@@ -125,17 +125,12 @@ class _NotesContainerState extends State<NotesContainer> {
                     return snapshot.data != null
                         ? ListView.builder(
                             itemCount: snapshot.data.length,
-                            itemBuilder: (context, index) => 
-                            InkWell(
-                              onTap: (){
-                                print(snapshot.data[index].absolute.path);
-                              },
-                              child : File(
-                                heightFactor: 0.08,
-                                fileName: snapshot.data[index].absolute.path.toString().substring(_getLength(currPath)),
-                                fileSize: '20',
-                                //fileSize: p.extension(snapshot.data[index].absolute.path).replaceFirst('.', ''),
-                              ),
+                            itemBuilder: (context, index) => File(
+                              heightFactor: 0.08,
+                              fileName: snapshot.data[index].absolute.path.toString().substring(_getLength(currPath)),
+                              fileSize: '20',
+                              filePath: snapshot.data[index].absolute.path.toString(),
+                              //fileSize: p.extension(snapshot.data[index].absolute.path).replaceFirst('.', ''),
                             )
                             /*
                             Card(

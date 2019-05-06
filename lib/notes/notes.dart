@@ -6,7 +6,7 @@ import 'package:flutter_file_manager/flutter_file_manager.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'file.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:path/path.dart' as p;
 
 class Notes extends StatefulWidget {
   final String userId;
@@ -65,7 +65,7 @@ class _NotesState extends State<Notes> {
           bottom: TabBar(
             tabs: <Widget>[
               Tab(icon: Icon(Icons.folder)),
-              Tab(icon: Icon(Icons.picture_as_pdf))
+              Tab(icon: Icon(Icons.folder_open))
             ],
           ),
         ),
@@ -130,16 +130,12 @@ class _NotesState extends State<Notes> {
                     return snapshot.data != null
                         ? ListView.builder(
                             itemCount: snapshot.data.length,
-                            itemBuilder: (context, index) => InkWell(
-                              onTap: (){
-                                print(snapshot.data[index].absolute.path);
-                              },
-                              child : File(
-                                heightFactor: 0.08,
-                                fileName: snapshot.data[index].absolute.path.toString().substring(32),
-                                fileSize: '20',
-                                //fileSize: p.extension(snapshot.data[index].absolute.path).replaceFirst('.', ''),
-                              ),
+                            itemBuilder: (context, index) => File(
+                              heightFactor: 0.08,
+                              fileName: snapshot.data[index].absolute.path.toString().substring(32),
+                              fileSize: '10',
+                              filePath: snapshot.data[index].absolute.path.toString(),
+                              fileType: p.extension(snapshot.data[index].absolute.path).replaceFirst('.', ''),
                             )
                           )
                         : Center(
