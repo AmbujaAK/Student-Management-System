@@ -11,7 +11,7 @@ import '../profile/editStudentProfile.dart';
 //import '../firebase/attendance.dart';
 import 'about.dart';
 import '../attendance/attendanceOption.dart';
-import '../notes/studyMain.dart';
+import '../notes/notes.dart';
 
 class DrawerMenu extends StatelessWidget {
   final List list;

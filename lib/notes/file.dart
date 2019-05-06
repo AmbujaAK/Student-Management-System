@@ -8,6 +8,8 @@ class File extends StatelessWidget {
   final String fileName;
   final String fileType;
   final String fileSize;
+  final String title;
+  final String currPath;
 
   File({
     Key key,
@@ -17,7 +19,9 @@ class File extends StatelessWidget {
     this.widthFactor,
     this.fileName,
     this.fileType,
-    this.fileSize
+    this.fileSize,
+    this.title,
+    this.currPath
   });
   
   @override
